@@ -1,0 +1,50 @@
+<%- layout("/layout/boilerplate") %>
+<body>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+    <h3>In detail explaination about this place - <%= content.title %></h3>
+    </div>
+            <div class="card col-6 offset-2" style="width: 18rem;">
+                <img src="<%=content.image.url%>" class="card-img-top show-Photo" alt="...">
+                <div class="card-body">
+                <p class="card-text"><b><%=content.title%></b></p>
+                <%= content.description %><br>
+                &#8377;<%= content.price.toLocaleString("en-IN") %><br>
+                <%= content.location %><br>
+                <%= content.country %><br>
+                </div>
+            </div>
+    <div class="colbtn ">
+        <a href="http://localhost:8080/listings/<%= content._id %>/edit" class="btn btn-dark col-1 offset-2">edit</a>
+        <form action="http://localhost:8080/listings/<%= content._id %>?_method=DELETE" method="post">
+            <button class="btn btn-dark offset-4 add-btn">Delete</button>
+        </form>
+    </div>
+    <div class="col-8 offset-2 mb-2 mt-2">
+        <h4>leave your review - </h4>
+        <form action="http://localhost:8080/listings/<%= content._id %>/reviews" method="post">
+            <div class="mb-2 mt-2">
+                <label for="rating" class="form-label">Rating:</label>
+                <input type="range" name="reviews[rating]" id="" min="1" max="5" class="form-control form-range">
+            </div>
+            <div class="mb-3 mt-2">
+                <label for="comment" class="form-label">Comment:</label>
+                <textarea name="reviews[comment]" id="" rows='5' cols="25" class="form-control"></textarea>
+            </div>
+            <button class='btn btn-outline-dark'>Submit</button>
+        </form>
+        <%= content.reviews %>
+        <% for(i in content.reviews) {%>
+        <h4><%= i %></h4>
+        <% } %>
+    </div>
+    <script>
+        document.querySelector("form").addEventListener("submit",(e)=>{
+            e.preventDefault();
+            let con = confirm("Are sure this data will be deleted permanently!!!");
+            if(con){
+                document.querySelector("form").submit();
+            }
+        });
+    </script>
+</div></div></body>
