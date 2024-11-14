@@ -4,7 +4,7 @@
         <div class="col-8 offset-2">
     <h3>In detail explaination about this place - <%= content.title %></h3>
     </div>
-            <div class="card col-6 offset-2" style="width: 18rem;">
+            <div class="cards col-6 offset-2 card-listing" style="width: 18rem;">
                 <img src="<%=content.image.url%>" class="card-img-top show-Photo" alt="...">
                 <div class="card-body">
                 <p class="card-text"><b><%=content.title%></b></p>
@@ -24,18 +24,53 @@
         <h4>leave your review - </h4>
         <form action="http://localhost:8080/listings/<%= content._id %>/reviews" method="post">
             <div class="mb-2 mt-2">
-                <label for="rating" class="form-label">Rating:</label>
-                <input type="range" name="reviews[rating]" id="" min="1" max="5" class="form-control form-range">
+                <!-- <label for="rating" class="form-label">Rating:</label>
+                <input type="range" name="reviews[rating]" id="" min="1" max="5" class="form-control form-range"> -->
+                <fieldset class="starability-coinFlip">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="reviews[rating]" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="reviews[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="reviews[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="reviews[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="reviews[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="reviews[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
             </div>
             <div class="mb-3 mt-2">
-                <label for="comment" class="form-label">Comment:</label>
-                <textarea name="reviews[comment]" id="" rows='5' cols="25" class="form-control"></textarea>
+                <label for="comments" class="form-label">Comment:</label>
+                <textarea name="reviews[comment]"  id="comments" rows='5' cols="25" class="form-control" required></textarea>
+                <div class="invalid-feedback">
+                    Description up there!!!
+                </div>
             </div>
+           
+            <!-- <div class="mb-3">
+                <label for="validationTextarea" class="form-label">Textarea</label>
+                <textarea class="form-control " id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                <div class="invalid-feedback">
+                Please enter a message in the textarea.
+                </div>
+              </div> -->
             <button class='btn btn-outline-dark'>Submit</button>
         </form>
-        <%= content.reviews %>
-        <% for(i in content.reviews) {%>
-        <h4><%= i %></h4>
+        </div>
+        
+        <div class="row col-8 offset-2">
+            <h3>All Reviews</h3>
+        <% for(i of content.reviews) {%>
+            <div class="card ms-4 mt-2 mb-3" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <p class="starability-result" data-rating="<%= i.rating %>">
+                        <%= i.rating %>
+                    </p></h5>
+                <p class="card-text">Comment : <%= i.comment %></p>
+                </div>
+            </div>
         <% } %>
     </div>
     <script>

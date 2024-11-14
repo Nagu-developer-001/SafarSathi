@@ -15,4 +15,4 @@ const reviewing = new Schema({
     },
 });
 
-module.exports = new mongoose.model("review",reviewing);
+module.exports = mongoose.model("Review",reviewing);

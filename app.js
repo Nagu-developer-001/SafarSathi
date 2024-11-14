@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const port = 8080;
 const placeList = require("./models/wonderLust.js");
-const review = require("./models/review.js");
+const Review = require("./models/review.js");
 const methodOverload = require("method-override");
 const ejsMate = require("ejs-mate");
 //TODO use ejs-locals for all ejs templates:
@@ -18,6 +18,7 @@ app.use(methodOverload("_method"));
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressErr = require("./utils/ExpressErr.js");
 const validateUserData = require("./joiSchema.js");
+const validateUserRating = require("./joiSchema.js");
 console.log(ExpressErr);
 main().then((res)=>{
     console.log("Successfully Connected to DataBase!");
@@ -27,10 +28,19 @@ main().then((res)=>{
 const validateData = (req,res,next)=>{
     console.log(req.body);
     console.log("ERROR IS OCCURING");
-    let palceListsErr = validateUserData.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
-    console.log(validateUserData.validate(req.body));
-    if(palceListsErr.error){
-        throw new ExpressErr(500,error);
+    let err = validateUserData.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
+    console.log(err);
+    if(err){
+        throw new ExpressErr(500,err); 
+    }else{
+        next();
+    }
+}
+const validateRating = (req,res,next)=>{
+    let err = validateUserRating.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
+    console.log(err);
+    if(err){
+        throw new ExpressErr(500,err); 
     }else{
         next();
     }
@@ -113,7 +123,7 @@ app.delete("/listings/:id",wrapAsync(async(req,res)=>{
     res.redirect("/listings");
 }));
 //TODO POSTING REVIEWS
-app.post("/listings/:id/reviews",async (req,res)=>{
+app.post("/listings/:id/reviews",validateRating,wrapAsync(async (req,res)=>{
     console.log("LOGGING POST REVIEW",req.body);
     //res.send("LOGGING POST REVIEW");
 
@@ -121,7 +131,7 @@ app.post("/listings/:id/reviews",async (req,res)=>{
     console.log(id);
 
 
-    let review1 = new review(req.body.reviews);
+    let review1 = new Review(req.body.reviews);
     await review1.save();
 
     let placeReview = await placeList.findById(id);
@@ -130,7 +140,7 @@ app.post("/listings/:id/reviews",async (req,res)=>{
     await placeReview.save();
 
     res.redirect(`/listings/${id}`);
-});
+}));
 
 
 function validateErr(err){

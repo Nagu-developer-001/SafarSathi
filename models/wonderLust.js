@@ -25,7 +25,7 @@ const placeSchema =  new Schema({
     reviews:[
         {
             type:Schema.Types.ObjectId,
-            ref:"reviews"
+            ref:"Review"
         }
     ]
 });
