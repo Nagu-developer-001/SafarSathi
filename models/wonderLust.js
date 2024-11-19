@@ -29,7 +29,10 @@ const placeSchema =  new Schema({
         }
     ]
 });
-
+placeSchema.post("findOneAndDelete",async (Listing)=>{
+    console.log(Listing,"POST MIDDLEWARE");
+    let res = await review.deleteMany({_id:{$in:Listing.reviews}});
+});
 const placeList = new mongoose.model("placeList",placeSchema);
 
 module.exports = placeList;
