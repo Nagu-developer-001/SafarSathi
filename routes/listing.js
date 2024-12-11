@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const placeList = require("../models/wonderLust.js");
-const {validateUserData} = require("../joiSchema.js");
+const validateUserData = require("../joiSchema.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressErr = require("../utils/ExpressErr.js");
+const passport = require("passport");
 
-
-
+const {isLogined} = require("../AuthenticLogin.js");
 
 const validateData = (req,res,next)=>{
     console.log(req.body);
@@ -46,20 +46,24 @@ router.get("/",wrapAsync(async(req,res)=>{
     res.render("listings/index.ejs",{allListing});
 }));
 //TODO NEW ROUTE
-router.get("/new",wrapAsync((req,res)=>{
-    res.render("listings/newForm.ejs");
+router.get("/new",isLogined,wrapAsync((req,res)=>{
+        res.render("listings/newForm.ejs");
 }));
 //TODO SHOW ROUTE
 router.get("/:id",wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let content = await placeList.findById(id).populate("reviews");
+    if(!content){
+        req.flash("error","Your searching for this content is not found");
+        res.redirect("/listings");
+    }
     //console.log(content);
     //
     res.render("listings/show.ejs",{content});
 }));
 
 //TODO CREATE ROUTE
-router.post("/",validateData,wrapAsync(async(req,res)=>{
+router.post("/",isLogined,validateData,wrapAsync(async(req,res)=>{
     // if(!req.body.Listing){
     //     next( new ExpressErr(402,"INTERNAL SERVER ERROR"));
     // }
@@ -67,27 +71,40 @@ router.post("/",validateData,wrapAsync(async(req,res)=>{
     let placeLists = req.body.Listing;
     let placeAdd = await placeList.insertMany(placeLists);
     console.log(placeAdd);
+    req.flash("success","New Listing is Created!!!");
     res.redirect("/listings");
 }));
 //TODO EDIT ROUTE
-router.get("/:id/edit",wrapAsync(async(req,res)=>{
+router.get("/:id/edit",isLogined,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let content = await placeList.findById(id);
     console.log(content);
+    if(!content){
+        req.flash("error","This list is not exist!!");
+        res.redirect("/listings");
+    }
     res.render("listings/edit.ejs",{content});
 }));
 //TODO UPDATE ROUTE
-router.put("/:id",validateData,wrapAsync(async(req,res)=>{
+router.put("/:id",isLogined,validateData,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await placeList.findByIdAndUpdate(id,{...req.body.Listing});
+    req.flash("success","Edited Successfully");
     res.redirect("/listings");
 }));
 //TODO DELETE ROUTE
-router.delete("/:id",wrapAsync(async(req,res)=>{
+router.delete("/:id",isLogined,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let deleteEle = await placeList.findByIdAndDelete(id);
+    req.flash("success","Deleted Successfully");
     res.redirect("/listings");
 }));
+
+
+
+
+
+
 
 
 

@@ -7,7 +7,7 @@ const Review = require("../models/review.js");
 
 const ExpressErr = require("../utils/ExpressErr.js");
 
-const {validateUserRating} = require("../joiSchema.js");
+const validateUserRating = require("../joiSchema2.js");
 
 const wrapAsync = require("../utils/wrapAsync.js");
 
@@ -23,24 +23,21 @@ const validateRating = (req,res,next)=>{
 }
 
 //TODO POSTING REVIEWS
-router.post("/listings/:id/reviews",validateRating,wrapAsync(async (req,res)=>{
-    console.log("LOGGING POST REVIEW",req.body);
-    //res.send("LOGGING POST REVIEW");
 
-    let id = req.params;
-    console.log(id);
+router.post("/listings/:id/reviews",validateRating,wrapAsync(async(req,res)=>{
+    let {rating,comment}=req.body;
+    const {id}=req.params;
+    let listing=await placeList.findById(id);
+    let newReview=new Review(req.body.reviews);
+    listing.reviews.push(newReview);
+    await newReview.save();
+    await listing.save();
+    req.flash("success","Review Added Successfully");
 
+    res.redirect(`/listings/${id}`);
 
-    let review1 = new Review(req.body.reviews);
-    await review1.save();
-
-    let placeReview = await placeList.findById(id);
-    //console.log(placeReview);
-    placeReview.reviews.push(review1);
-    await placeReview.save();
-
-    res.redirect(`/listings/${placeReview._id}`);
 }));
+
 
 //TODO DELETE REQUEST
 router.delete("/listings/:id/reviews/:reviewsId",wrapAsync(async (req,res) => {
@@ -52,6 +49,7 @@ router.delete("/listings/:id/reviews/:reviewsId",wrapAsync(async (req,res) => {
     // console.log(id);
     let re2 = await Review.findByIdAndDelete(reviewId);
     let re1 = await placeList.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    req.flash("error","Review deleted Successfully");
     // console.log("TRYING TO DELETE REVIEWS");
     // console.log(re1);
     // console.log(re1);

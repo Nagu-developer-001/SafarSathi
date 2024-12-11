@@ -16,12 +16,64 @@ app.use(express.json());
 app.use(methodOverload("_method"));
 const ExpressErr = require("./utils/ExpressErr.js");
 
-let listing = require("./routes/listing.js");
-let reviews = require("./routes/review.js");
+let listingRouter = require("./routes/listing.js");
+let reviewsRouter = require("./routes/review.js");
+let userRouter = require("./routes/user.js");
+let otherCategory = require("./routes/otherCategory.js");
 
-app.use("/",reviews);
-app.use("/listings",listing);
 
+
+const flash = require("connect-flash");
+
+const session = require("express-session");
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
+
+
+
+
+
+const sessionOptions = 
+    {secret:"set_your_secret",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now() +7*24*60*60*1000,//TODO 7day each day 24 hrs and each hrs has 60 mins and each min 60 sec - 1000 sec
+        maxAge:7*24*60*60*1000,
+        httpOnly:true,
+    }
+};
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    res.locals.failure = req.flash("error");
+    res.locals.nowUser = req.user;
+    console.log(res.locals.success)
+    next();
+});
+
+
+app.use("/",reviewsRouter);
+app.use("/listings",listingRouter);
+app.use("/",userRouter);
+app.use("/",otherCategory);
 
 
 
@@ -42,8 +94,13 @@ app.use("/api",(req,res,next)=>{
     next();
 });
 //TODO CREATE ROUTE
-app.get("/",(req,res)=>{
-    res.send("GET is working!!!... .. .");
+app.get("/registerDemoUser",async(req,res)=>{
+    let newuser = new User({
+        email:"user3@gmail.com",
+        username:"nagabhushana4"
+    });
+    let newDataDemo = await User.register(newuser,"helloworld");
+    res.send(newDataDemo);
 });
 
 
