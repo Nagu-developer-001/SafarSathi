@@ -7,8 +7,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressErr = require("../utils/ExpressErr.js");
 const passport = require("passport");
 
-const {isLogined,redirection} = require("../AuthenticLogin.js");
-console.log(isLogined,redirection);
+const {isLogined} = require("../AuthenticLogin.js");
+
 const validateData = (req,res,next)=>{
     console.log(req.body);
     console.log("ERROR IS OCCURING");
@@ -47,10 +47,11 @@ router.get("/",wrapAsync(async(req,res)=>{
 }));
 //TODO NEW ROUTE
 router.get("/new",isLogined,wrapAsync((req,res)=>{
+        console.log(req.locals);
         res.render("listings/newForm.ejs");
 }));
 //TODO SHOW ROUTE
-router.get("/:id",wrapAsync(async(req,res)=>{
+router.get("/:id",isLogined,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let content = await placeList.findById(id).populate("reviews");
     if(!content){

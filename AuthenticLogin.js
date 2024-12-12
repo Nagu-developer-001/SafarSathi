@@ -2,12 +2,17 @@ module.exports.isLogined = (req,res,next)=>{
     // let r = req.originalUrl;
     // console.log(r);
     if(!req.isAuthenticated()){
-        //req.session.redirectUrl = req.originalUrl; 
         req.flash("error","!!---PLEASE---LOGIN---!!");
         res.redirect("/login");
+        req.session.redirectUrl = req.originalUrl; 
+        console.log(redirectUrl);
     }
     next();
 }
-module.exports = function re(req,res,next){
-    console.log("hello");
+module.exports.saveUrl =(req,res,next)=>{
+    if(req.session.redirectUrl){
+        req.locals.redirectUrl = req.locals.redirectUrl;
+        console.log(req.locals.redirectUrl)
+    }
+    next();
 }

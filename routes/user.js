@@ -5,7 +5,7 @@ const User = require("../models/user.js");
 const passport = require("passport");
 const flash = require("connect-flash");
 
-
+const {saveUrl} = require("../AuthenticLogin.js");
 
 router.get("/signup",(req,res)=>{
     res.render("./signup/signup.ejs")
@@ -39,12 +39,12 @@ router.get("/login",(req,res)=>{
     res.render("./signup/login.ejs");
 });
 
-router.post("/login",
+router.post("/login",saveUrl,
     passport.authenticate("local",
     { failureRedirect: "/login",failureFlash : true }),async(req,res)=>{
     req.flash("success","Welcome back to SafarSathi");
     console.log();
-    res.redirect(req.locals.redirectUrl);
+    res.redirect(req.locals);
 });
 
 
