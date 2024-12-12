@@ -1,4 +1,4 @@
-const isLogined = (req,res,next)=>{
+module.exports.isLogined = (req,res,next)=>{
     // let r = req.originalUrl;
     // console.log(r);
     if(!req.isAuthenticated()){
@@ -8,5 +8,6 @@ const isLogined = (req,res,next)=>{
     }
     next();
 }
-
-module.exports = isLogined;
+module.exports = function re(req,res,next){
+    console.log("hello");
+}

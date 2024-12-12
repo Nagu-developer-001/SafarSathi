@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const User = require("../models/user.js");
 const passport = require("passport");
 const flash = require("connect-flash");
-const {Redirection} = require("../AuthenticLogin.js");
 
 
 
@@ -40,7 +39,7 @@ router.get("/login",(req,res)=>{
     res.render("./signup/login.ejs");
 });
 
-router.post("/login",Redirection,
+router.post("/login",
     passport.authenticate("local",
     { failureRedirect: "/login",failureFlash : true }),async(req,res)=>{
     req.flash("success","Welcome back to SafarSathi");

@@ -7,8 +7,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressErr = require("../utils/ExpressErr.js");
 const passport = require("passport");
 
-const {isLogined} = require("../AuthenticLogin.js");
-
+const {isLogined,redirection} = require("../AuthenticLogin.js");
+console.log(isLogined,redirection);
 const validateData = (req,res,next)=>{
     console.log(req.body);
     console.log("ERROR IS OCCURING");
