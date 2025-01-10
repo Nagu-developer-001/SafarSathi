@@ -8,18 +8,21 @@
                 <img src="<%=content.image.url%>" class="card-img-top show-Photo" alt="...">
                 <div class="card-body">
                 <p class="card-text"><b><%=content.title%></b></p>
-                <%= content.description %><br>
-                &#8377;<%= content.price.toLocaleString("en-IN") %><br>
-                <%= content.location %><br>
-                <%= content.country %><br>
+                <p class="card-text">Owned by  <b><%= content.owner.username %></b></p>
+                <p class="card-text"><b><%= content.description %></b></p><br>
+                <p class="card-text"><b>&#8377;<%= content.price.toLocaleString("en-IN") %></b></p><br>
+                <p class="card-text"><b><%= content.location %></b></p><br>
+                <p class="card-text"><b><%= content.country %></b></p><br>
                 </div>
             </div>
-    <div class="colbtn ">
-        <a href="http://localhost:8080/listings/<%= content._id %>/edit" class="btn btn-dark col-1 offset-2">edit</a>
-        <form action="http://localhost:8080/listings/<%= content._id %>?_method=DELETE" method="post">
-            <button class="btn btn-dark offset-4 add-btn">Delete</button>
-        </form>
-    </div>
+    <%if(nowUser && nowUser._id.equals(content.owner._id)){%>
+            <div class="colbtn">
+            <a href="http://localhost:8080/listings/<%= content._id %>/edit" class="btn btn-dark col-1 offset-2">edit</a>
+            <form action="http://localhost:8080/listings/<%= content._id %>?_method=DELETE" method="post">
+                <button class="btn btn-dark offset-4 add-btn">Delete</button>
+            </form>
+        </div>
+    <% } %>
     <div class="col-8 offset-2 mb-2 mt-2">
         <h4>leave your review - </h4>
         <form action="http://localhost:8080/listings/<%= content._id %>/reviews" method="post" novalidate class="needs-validation">            <div class="mb-2 mt-2">
@@ -53,7 +56,7 @@
             <div class="card ms-4 mt-2 mb-3" style="width: 18rem;">
                 <div class="card-body">
                 <h5 class="card-title">
-                    
+                    <p class="card-text">Comment : <%= i.author %></p>
                     <p class="starability-result" data-rating="<%= i.rating %>">
                         <%= i.rating %>
                     </p></h5>

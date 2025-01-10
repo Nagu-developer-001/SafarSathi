@@ -12,8 +12,7 @@ main().then((res) =>{
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/wonderLust")
 }
-
-placeList.insertMany([
+const data =[
     {
     title: "Cozy Beachfront Cottage",
     description:
@@ -360,8 +359,11 @@ placeList.insertMany([
     location: "Costa Rica",
     country: "Costa Rica",
     }
-]).then((res)=>{
-    console.log("inserted",res);
-}).catch((err)=>{
-    console.log(err);
-});
+] 
+// .then((res)=>{
+//     console.log("inserted",res);
+// }).catch((err)=>{
+//     console.log(err);
+// });
+
+module.exports = {data:data};

@@ -7,8 +7,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressErr = require("../utils/ExpressErr.js");
 const passport = require("passport");
 
-const {isLogined} = require("../AuthenticLogin.js");
-
+const {isLogined,listOwner} = require("../AuthenticLogin.js");
 const validateData = (req,res,next)=>{
     console.log(req.body);
     console.log("ERROR IS OCCURING");
@@ -51,14 +50,14 @@ router.get("/new",isLogined,wrapAsync((req,res)=>{
         res.render("listings/newForm.ejs");
 }));
 //TODO SHOW ROUTE
-router.get("/:id",isLogined,wrapAsync(async(req,res)=>{
+router.get("/:id",wrapAsync(async(req,res)=>{
     let {id} = req.params;
-    let content = await placeList.findById(id).populate("reviews");
+    let content = await placeList.findById(id).populate("reviews").populate("owner");
     if(!content){
         req.flash("error","Your searching for this content is not found");
         res.redirect("/listings");
     }
-    //console.log(content);
+    console.log(content);
     //
     res.render("listings/show.ejs",{content});
 }));
@@ -70,42 +69,40 @@ router.post("/",isLogined,validateData,wrapAsync(async(req,res)=>{
     // }
     console.log("hello");
     let placeLists = req.body.Listing;
+    placeLists.owner = req.user._id;
     let placeAdd = await placeList.insertMany(placeLists);
     console.log(placeAdd);
     req.flash("success","New Listing is Created!!!");
     res.redirect("/listings");
 }));
 //TODO EDIT ROUTE
-router.get("/:id/edit",isLogined,wrapAsync(async(req,res)=>{
+router.get("/:id/edit",isLogined,listOwner,wrapAsync(async(req,res)=>{
     let {id} = req.params;
+    console.log("Listing id :--",id);
+    console.log("Listing id :--",id);
+    console.log("Authenticated user : ",res.locals.nowUser._id);
     let content = await placeList.findById(id);
-    console.log(content);
+    console.log("owner id : -- :  ",content.owner._id);
+    //console.log(content);
     if(!content){
         req.flash("error","This list is not exist!!");
         res.redirect("/listings");
     }
-    res.render("listings/edit.ejs",{content});
 }));
 //TODO UPDATE ROUTE
-router.put("/:id",isLogined,validateData,wrapAsync(async(req,res)=>{
+router.put("/:id",isLogined,listOwner,validateData,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await placeList.findByIdAndUpdate(id,{...req.body.Listing});
     req.flash("success","Edited Successfully");
     res.redirect("/listings");
 }));
 //TODO DELETE ROUTE
-router.delete("/:id",isLogined,wrapAsync(async(req,res)=>{
+router.delete("/:id",isLogined,listOwner,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let deleteEle = await placeList.findByIdAndDelete(id);
     req.flash("success","Deleted Successfully");
     res.redirect("/listings");
 }));
-
-
-
-
-
-
 
 
 

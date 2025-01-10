@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router({mergeParams:true});
+const router = express.Router({ mergeParams: true });
 const mongoose = require("mongoose");
 
 const placeList = require("../models/wonderLust.js");
@@ -7,28 +7,33 @@ const Review = require("../models/review.js");
 
 const ExpressErr = require("../utils/ExpressErr.js");
 
-const validateUserRating = require("../joiSchema2.js");
+const {validateUserRating} = require("../joiSchema.js");
 
 const wrapAsync = require("../utils/wrapAsync.js");
+const {isLogined} = require("../AuthenticLogin.js");
 
 
 const validateRating = (req,res,next)=>{
+    let review = req.body;
+    console.log(review.parseInt(rating))
     let {err} = validateUserRating.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
-    console.log(err);
+    console.log(err,"------");
+    console.log(err,"!!!!!!");
     if(err){
-        throw new ExpressErr(500,err); 
-    }else{
-        next();
+        throw new ExpressErr(404,err); 
     }
+    next();
 }
 
 //TODO POSTING REVIEWS
 
-router.post("/listings/:id/reviews",validateRating,wrapAsync(async(req,res)=>{
+router.post("/listings/:id/reviews",wrapAsync(async(req,res)=>{
     let {rating,comment}=req.body;
     const {id}=req.params;
     let listing=await placeList.findById(id);
     let newReview=new Review(req.body.reviews);
+    newReview.author = req.user._id;
+    
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();

@@ -13,6 +13,10 @@ const reviewing = new Schema({
         type:Date,
         default:new Date()
     },
+    author:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
+    }
 });
 
 module.exports = mongoose.model("Review",reviewing);
