@@ -16,18 +16,19 @@ const {isLogined} = require("../AuthenticLogin.js");
 const validateRating = (req,res,next)=>{
     let review = req.body;
     console.log(review.parseInt(rating))
+    console.log(req.body);
     let {err} = validateUserRating.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
     console.log(err,"------");
     console.log(err,"!!!!!!");
-    if(err){
-        throw new ExpressErr(404,err); 
-    }
-    next();
+    if(!err){
+        next();
+    }throw new ExpressErr(404,err);
+    
 }
 
 //TODO POSTING REVIEWS
 
-router.post("/listings/:id/reviews",wrapAsync(async(req,res)=>{
+router.post("/listings/:id/reviews",validateRating,wrapAsync(async(req,res)=>{
     let {rating,comment}=req.body;
     const {id}=req.params;
     let listing=await placeList.findById(id);
