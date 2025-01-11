@@ -70,11 +70,10 @@ app.use((req,res,next)=>{
 });
 
 
-app.use("/",reviewsRouter);
 app.use("/listings",listingRouter);
 app.use("/",userRouter);
 app.use("/",otherCategory);
-
+app.use("/",reviewsRouter);
 
 
 // const review = require("./models/review.js");
@@ -119,17 +118,17 @@ app.all("*",(req,res,next)=>{
     next(new ExpressErr(404,"PAGE NOT FOUND!!"));
 });
 app.use((err, req, res, next) => {
-    if (err.name === "ValidationError") {
-        err = validateErr(err); // Assuming validateErr transforms the error appropriately
-    } else if (err.name === "CastError") {
-        err = castError(err); // Assuming castError transforms the error appropriately
-    }
+    // if (err.name === "ValidationError") {
+    //     err = validateErr(err); // Assuming validateErr transforms the error appropriately
+    // } else if (err.name === "CastError") {
+    //     err = castError(err); // Assuming castError transforms the error appropriately
+    // }
 
-    // Set a default error status if one isn’t already set
-    err.status = err.status || 500;
+    // // Set a default error status if one isn’t already set
+    let {statusCode=500,message="Something went wrong"} = err;
 
     // Render the error page with the message
-    res.status(err.status).render("./listings/error.ejs", { message: err.message });
+    res.status(statusCode).render("./listings/error.ejs", { message });
 });
 
 app.listen(port,(req,res)=>{

@@ -8,11 +8,10 @@ module.exports.isLogined = (req, res, next) => {
         req.session.redirectUrl = req.originalUrl; 
         req.flash("error", "!!---PLEASE---LOGIN---!!");
         console.log(req.session.redirectUrl); 
-        res.redirect("/login"); 
+        res.redirect("/login");
     }
     next();
 };
-
 module.exports.saveUrl = (req, res, next) => {
     if (req.session.redirectUrl) {
         res.locals.redirectUrl = req.session.redirectUrl; 

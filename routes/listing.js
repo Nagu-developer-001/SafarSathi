@@ -11,7 +11,7 @@ const {isLogined,listOwner} = require("../AuthenticLogin.js");
 const validateData = (req,res,next)=>{
     console.log(req.body);
     console.log("ERROR IS OCCURING");
-    let {err} = validateUserData.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
+    let err = validateUserData.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
     console.log(err);
     if(err){
         throw new ExpressErr(500,err); 
