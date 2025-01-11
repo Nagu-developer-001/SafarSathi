@@ -14,7 +14,7 @@ module.exports  = validateUserData;
 
 const validateUserRating = Joi.object({
     reviews:Joi.object({
-        rating:Joi.string().required(),
+        rating:Joi.number().min(1).max(5).required(),
         comment:Joi.string().required()
     }).required(),
 });

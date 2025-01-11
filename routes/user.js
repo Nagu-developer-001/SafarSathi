@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({mergeParams:true});
 const mongoose = require("mongoose");
 const User = require("../models/user.js");
 const passport = require("passport");
@@ -63,5 +63,27 @@ router.get("/logout", (req, res, next) => {
         res.redirect("/login");
     }
 });
+router.get("/forgotPassword",(req,res)=>{
+    res.render("./signup/forgotEmail.ejs");
+});
 
+router.post("/forgotPassword",async(req,res)=>{
+    let {Re_email,password,Cpassword} = req.body;
+    console.log(Re_email);
+    let listingUser = await User.findOne({email:Re_email});
+    console.log(listingUser);
+    if(!listingUser){
+        req.flash("error","Account not found!!");
+        console.log("ERROR-A/c not found");
+        return res.redirect("/forgotPassword");
+    }
+    if(password!=Cpassword){
+        req.flash("error","write the both password correctly!");
+        return res.redirect("/forgotPassword");
+    }
+    await listingUser.setPassword(Cpassword);
+    await listingUser.save();
+    req.flash("success","Successfully Updated password!");
+    res.redirect("/login");
+});
 module.exports = router;
