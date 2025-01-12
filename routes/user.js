@@ -5,14 +5,14 @@ const User = require("../models/user.js");
 const passport = require("passport");
 const flash = require("connect-flash");
 
-const { saveUrl } = require("../AuthenticLogin.js");
+const { saveUrl , UniqueUrl} = require("../AuthenticLogin.js");
 
 
 router.get("/signup", (req, res) => {
     res.render("./signup/signup.ejs");
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", saveUrl,async (req, res, next) => {
     try {
         const { email, username, password } = req.body;
         const newUser = new User({ email, username });
@@ -21,8 +21,9 @@ router.post("/signup", async (req, res, next) => {
             if (err) {
                 return next(err);
             }
+            let redirectUnique = res.locals.redirectUrl || res.locals.redirectUrlUnique;
             req.flash("success", "Welcome to SafarSathi!!!");
-            res.redirect("/listings");
+            res.redirect(redirectUnique);
         });
     } catch (e) {
         req.flash("failure", e.message);
@@ -43,9 +44,9 @@ router.post(
         failureFlash: true,
     }),
     (req, res) => {
-        const redirectUrl = res.locals.redirectUrl || "/listings";
+        const redirectUrl = res.locals.redirectUrl || res.locals.redirectUrlUnique || "listings";
         req.flash("success", "Welcome back to SafarSathi");
-        res.redirect(redirectUrl);
+        return res.redirect(redirectUrl);
     }
 );
 

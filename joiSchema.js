@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validateUserData = Joi.object({
+module.exports.validateUserData = Joi.object({
     Listing:Joi.object({
         title:Joi.string().required(),
         description:Joi.string().required(),
@@ -10,13 +10,10 @@ const validateUserData = Joi.object({
         country:Joi.string().required(),
     }).required(),
 });
-module.exports  = validateUserData;
 
-const validateUserRating = Joi.object({
+module.exports.validateUserRating = Joi.object({
     reviews:Joi.object({
-        rating:Joi.number().min(1).max(5).required(),
-        comment:Joi.string().required()
+        rating:Joi.number().required().min(1).max(5),
+        comment:Joi.string().required(),
     }).required(),
 });
-
-module.exports = validateUserRating;

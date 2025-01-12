@@ -7,18 +7,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressErr = require("../utils/ExpressErr.js");
 const passport = require("passport");
 
-const {isLogined,listOwner} = require("../AuthenticLogin.js");
-const validateData = (req,res,next)=>{
-    console.log(req.body);
-    console.log("ERROR IS OCCURING");
-    let err = validateUserData.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
-    console.log(err);
-    if(err){
-        throw new ExpressErr(500,err); 
-    }else{
-        next();
-    }
-}
+const {isLogined,listOwner,UniqueUrl} = require("../AuthenticLogin.js");
+const {validateData} =require("../AuthenticLogin.js");
 
 
 //todo TESTING ROUTE
@@ -49,14 +39,26 @@ router.get("/new",isLogined,wrapAsync((req,res)=>{
         console.log(req.locals);
         res.render("listings/newForm.ejs");
 }));
+
+// const log = (req,res,next)=>{
+//     if(!req.isAuthenticated()){
+//         req.flash("error","If you want to add review Please log-in to our System!!!");
+//         return next();
+//     }
+//     next();
+// }
 //TODO SHOW ROUTE
-router.get("/:id",wrapAsync(async(req,res)=>{
+router.get("/:id",UniqueUrl,wrapAsync(async(req,res,next)=>{
     let {id} = req.params;
     let content = await placeList.findById(id).populate("reviews").populate("owner");
     if(!content){
         req.flash("error","Your searching for this content is not found");
         res.redirect("/listings");
     }
+    // if(!req.isAuthenticated()){
+    //     req.flash("error","If you want to add review Please log-in to our System!!!");
+    //      next();
+    // }
     console.log(content);
     //
     res.render("listings/show.ejs",{content});
