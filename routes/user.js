@@ -5,55 +5,43 @@ const mongoose = require("mongoose");
 const User = require("../models/user.js");
 const passport = require("passport");
 const flash = require("connect-flash");
-
-const { saveUrl , UniqueUrl} = require("../AuthenticLogin.js");
-
+const crypto = require('crypto');
+const { saveUrl , UniqueUrl,validateRegister,setValues} = require("../AuthenticLogin.js");
 
 router.get("/signup", (req, res) => {
     res.render("./signup/signup.ejs");
 });
 
-router.post("/signup",saveUrl,async (req, res, next) => {
-    try {
-        const { email, username, password } = req.body;
+router.post("/signup",validateRegister,saveUrl,async (req, res, next) => {
+    //const { email, username, password } = req.body;
+    res.redirect("/validateotp");
+});
+router.get("/validateotp",(req,res)=>{
+    res.render("./signup/otp.ejs");
+});
+router.post("/validateotp",async(req,res)=>{
+    let email = req.session.email;
+    let username = req.session.username;
+    let password = req.session.password;
+    let otp = req.body;
+    otp = otp.otp.join("");
+    if(otp == req.session.otp){
+        const newUser = new User({ email, username });
+        const regUser = await User.register(newUser, password);
         console.log("sending email");
-        
-        const send = require('gmail-send')({
-            user: 'trivikramapvtltd524@gmail.com',
-            pass: 'cetunqqeqilwiiir',
-            to:   email,
-            subject: 'subject -  ',
-        });
-        send({
-            html:    `<p>Welcome to SufarSathi a tourist accomodation platform that simplifies accomodation booking throughout the journey</p><br><h4>Hope our journey would be ever lasting!!!.....</h4>`,
-        }, async(error, result, fullResult) => {
-            if (error) console.error(error);
-            console.log(fullResult.accepted);
-            console.log(fullResult)
-            let n = fullResult.accepted.length
-            if(n==0){
-                req.flash("error","Please enter a valid email id");
-            }else{
-                const newUser = new User({ email, username });
-                const regUser = await User.register(newUser, password);
-                console.log("sending email");
-                req.login(regUser, (err) => {
-                    if (err) {
-                        return next(err);
-                    }
-                    //requested url
-                    let redirectUnique = req.session.requestedUrl||res.locals.redirectUrlUnique||"/listings";
-                    req.flash("success", "Welcome to SafarSathi!!!");
-                    res.redirect(redirectUnique);
-                });
+        req.login(regUser, (err) => {
+            if (err) {
+                return next(err);
             }
+            //requested url
+            req.flash("success","Welcome to SafarSathi");
+            res.redirect("/listings");
         });
-    } catch (e) {
-        req.flash("failure", e.message);
+    }else{
+        req.flash("error","You Entered wrong OTP");
         res.redirect("/signup");
     }
 });
-
 
 router.get("/login", (req, res) => {
     res.render("./signup/login.ejs");

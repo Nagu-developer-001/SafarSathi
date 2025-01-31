@@ -50,7 +50,7 @@ router.get("/new",isLogined,wrapAsync((req,res)=>{
 //TODO SHOW ROUTE
 router.get("/:id",UniqueUrl,wrapAsync(async(req,res,next)=>{
     let {id} = req.params;
-    let content = await placeList.findById(id).populate("reviews").populate("owner");
+    let content = await placeList.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
     if(!content){
         req.flash("error","Your searching for this content is not found");
         res.redirect("/listings");
