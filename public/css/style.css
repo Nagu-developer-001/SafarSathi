@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Roboto:wght@100;300;400&display=swap');
+
+:root {
+    /* --primary-color: #f9532d; */
+    /* --primary-dark: #1F252E; */
+    --primary-color: #52489C;
+    --primary-dark: #1F252E;
+}
 body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
     /* btn color in new form  */
@@ -107,7 +116,7 @@ body{
 .accordion-item{
     border-radius: 20px !important;
 }
-.mode i {
+/* .mode i {
     font-size: 1.4rem;
     cursor: pointer;
     color: var(--primary-color);
@@ -116,7 +125,7 @@ body{
 }
 .dark-mode {
     background-color: var(--primary-dark);
-    color: #ffffff;
+    color: #fe424d ;
 }
 
 .mode input {
@@ -127,10 +136,12 @@ body{
 .dark-mode ul li a, 
 .dark-mode .main h3, 
 .dark-mode .main h1 {
-    color: #fff;
+    color: yellow;
 }
 .dark-mode ul li a.active, .dark-mode ul li a:hover {
     color: var(--primary-color);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, .1);
+    background: #fff;
 }
 
 .dark-mode header {
@@ -138,4 +149,4 @@ body{
     background: var(--primary-dark);
 }
 
-
+ */

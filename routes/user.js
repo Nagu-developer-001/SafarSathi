@@ -55,7 +55,7 @@ router.post(
         failureFlash: true,
     }),
     (req, res) => {
-        const redirectUrl = res.locals.redirectUrl || res.locals.redirectUrlUnique || "listings";
+        const redirectUrl = res.locals.redirectUrl || "listings";
         req.flash("success", "Welcome back to SafarSathi");
         return res.redirect(redirectUrl);
     }
