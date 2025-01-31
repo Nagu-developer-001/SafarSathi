@@ -12,7 +12,7 @@ const isvalid = (req,res,next)=>{
 }
 
 const wrapAsync = require("../utils/wrapAsync.js");
-const {validateRating,isLogined} = require("../AuthenticLogin.js");
+const {validateRating,isLogined,reviewOwner} = require("../AuthenticLogin.js");
 
 //TODO POSTING REVIEWS
 
@@ -38,7 +38,7 @@ router.post("/listings/:id/reviews",isLogined,validateRating,wrapAsync(async(req
 
 
 //TODO DELETE REQUEST
-router.delete("/listings/:id/reviews/:reviewsId",wrapAsync(async (req,res) => {
+router.delete("/listings/:id/reviews/:reviewsId",reviewOwner,wrapAsync(async (req,res) => {
     // res.send("TRYING TO DELETE REVIEWS")
     //console.log("TRYING TO DELETE REVIEWS");
     let id = req.params.id;
