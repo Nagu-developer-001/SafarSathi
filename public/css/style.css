@@ -107,3 +107,10 @@ body{
 .accordion-item{
     border-radius: 20px !important;
 }
+.mode i {
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    opacity: 0;
+    animation: rightSideAni 1.5s ease forwards;
+}
