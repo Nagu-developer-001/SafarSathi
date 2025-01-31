@@ -70,14 +70,16 @@ module.exports.validateRating = (req,res,next)=>{
 }
 module.exports.validateData = (req,res,next)=>{
     //console.log(req.body);
-    //console.log("ERROR IS OCCURING");
+    console.log("ERROR IS OCCURING");
     let err = validateUserData.validate(req.body);//TODO ANOTHER WAY TO GET THE MULTIPLE DATA FROM FORM ...
-    console.log(err);
-    if(err){
+    console.log(err,"hllo error");
+    if(!err){
         let errMsg = err.details.map((el)=>el.message).join(",");
+        console.log("error occuring");
         throw new ExpressErr(500,errMsg); 
     }
-    next();
+    console.log("hllo error")
+    return next();
 }
 
 module.exports.isLogined = (req, res, next) => {
