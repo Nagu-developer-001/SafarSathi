@@ -92,7 +92,7 @@ router.get("/:id/edit",isLogined,listOwner,wrapAsync(async(req,res)=>{
     }
 }));
 //TODO UPDATE ROUTE
-router.put("/:id",isLogined,listOwner,validateData,wrapAsync(async(req,res)=>{
+router.put("/:id",isLogined,validateData,listOwner,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await placeList.findByIdAndUpdate(id,{...req.body.Listing});
     req.flash("success","Edited Successfully");

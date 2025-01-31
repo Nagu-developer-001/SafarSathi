@@ -79,7 +79,7 @@ module.exports.validateData = (req,res,next)=>{
         throw new ExpressErr(500,errMsg); 
     }
     console.log("hllo error")
-    return next();
+    next();
 }
 
 module.exports.isLogined = (req, res, next) => {
