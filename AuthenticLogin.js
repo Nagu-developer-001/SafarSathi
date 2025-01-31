@@ -122,10 +122,11 @@ module.exports.listOwner = async(req,res,next) =>{
 module.exports.reviewOwner = async(req,res,next) =>{
     let {id,reviewsId} = req.params;
     let review = await Review.findById(reviewsId);
-    if(!review.author._id.equals(res.locals.nowUser._id)){
+    if(!review.author.equals(res.locals.nowUser._id)){
         console.log("USER AUTHENTICATED SUCCESSFULLY");
         req.flash("error","You did'nt created this review!!!");
         res.redirect(`/listings/${id}`);
+    } else{
+        next();
     }
-    next();
 }

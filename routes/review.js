@@ -38,16 +38,17 @@ router.post("/listings/:id/reviews",isLogined,validateRating,wrapAsync(async(req
 
 
 //TODO DELETE REQUEST
-router.delete("/listings/:id/reviews/:reviewsId",reviewOwner,wrapAsync(async (req,res) => {
+router.delete("/listings/:id/reviews/:reviewsId",isLogined,reviewOwner,wrapAsync(async (req,res) => {
     // res.send("TRYING TO DELETE REVIEWS")
     //console.log("TRYING TO DELETE REVIEWS");
     let id = req.params.id;
     let reviewId  = req.params.reviewsId;
     // console.log(reviewId);
     // console.log(id);
-    let re2 = await Review.findByIdAndDelete(reviewId);
     let re1 = await placeList.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
-    req.flash("error","Review deleted Successfully");
+    let re2 = await Review.findByIdAndDelete(reviewId);
+    console.log(re1,re2)
+    req.flash("success","Review deleted Successfully");
     // console.log("TRYING TO DELETE REVIEWS");
     // console.log(re1);
     // console.log(re1);
