@@ -92,11 +92,11 @@ router.get("/:id/edit",isLogined,listOwner,wrapAsync(async(req,res)=>{
     }
 }));
 //TODO UPDATE ROUTE
-router.put("/:id",isLogined,validateData,listOwner,wrapAsync(async(req,res)=>{
+router.put("/:id",isLogined,validateData,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await placeList.findByIdAndUpdate(id,{...req.body.Listing});
     req.flash("success","Edited Successfully");
-    res.redirect("/listings");
+    res.redirect(`/listings/${id}`);
 }));
 //TODO DELETE ROUTE
 router.delete("/:id",isLogined,listOwner,wrapAsync(async(req,res)=>{
