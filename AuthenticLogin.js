@@ -109,14 +109,11 @@ module.exports.saveUrl = (req, res, next) => {
 };
 
 module.exports.listOwner = async(req,res,next) =>{
-    let {id} = req.params;
-    let content = await placeList.findById(id);
-    if(content.owner._id.equals(res.locals.nowUser._id)){
-        console.log("USER AUTHENTICATED SUCCESSFULLY");
-        res.render("listings/edit.ejs",{content});
-    }else{
-        req.flash("error","You are not allowed to access!!!");
-        res.redirect(`/listings/${id}`);
+    let { id } = req.params;
+    let listing= await placeList.findById(id);
+    if(!listing.owner._id.equals(res.locals.nowUser._id)){
+    req.flash("error","You are not the owner of this listing");
+    return res.redirect(`/listings/${id}`);
     }
     next();
 }
