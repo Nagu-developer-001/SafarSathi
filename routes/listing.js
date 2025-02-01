@@ -28,30 +28,16 @@ router.get("/api/TestListings",async(req,res)=>{
         let x = await placeList.insertMany(place);
         console.log(x);
 });
-//TODO INDEX ROUTE
-router.get("/",wrapAsync(listingControllers.index));
+router.route("/")
+    .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE
+    .post(isLogined,validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
 //TODO NEW ROUTE
 router.get("/new",isLogined,wrapAsync(listingControllers.renderFrom));
-
-// const log = (req,res,next)=>{
-//     if(!req.isAuthenticated()){
-//         req.flash("error","If you want to add review Please log-in to our System!!!");
-//         return next();
-//     }
-//     next();
-// }
-//TODO SHOW ROUTE
-router.get("/:id",UniqueUrl,wrapAsync(listingControllers.getShow));
-
-//TODO CREATE ROUTE
-router.post("/",isLogined,validateData,wrapAsync(listingControllers.createList));
+router.route("/:id")
+    .get(UniqueUrl,wrapAsync(listingControllers.getShow))//TODO SHOW ROUTE
+    .put(isLogined,validateData,wrapAsync(listingControllers.updateList))//TODO UPDATE ROUTE
+    .delete(isLogined,listOwner,wrapAsync(listingControllers.deleteList))//TODO DELETE ROUTE
 //TODO EDIT ROUTE
 router.get("/:id/edit",isLogined,listOwner,wrapAsync(listingControllers.editList));
-//TODO UPDATE ROUTE
-router.put("/:id",isLogined,validateData,wrapAsync(listingControllers.updateList));
-//TODO DELETE ROUTE
-router.delete("/:id",isLogined,listOwner,wrapAsync(listingControllers.deleteList));
-
-
 
 module.exports = router;
