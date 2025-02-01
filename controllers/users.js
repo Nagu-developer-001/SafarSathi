@@ -43,3 +43,42 @@ module.exports.loginUser = (req, res) => {
     req.flash("success", "Welcome back to SafarSathi");
     return res.redirect(redirectUrl);
 }
+
+module.exports.logoutUser = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        req.logout((err) => {
+            if (err) {
+                return next(err);
+            }
+            req.flash("success", "You logged out");
+            res.redirect("/listings");
+        });
+    } else {
+        req.flash("error", "You are not logged in");
+        res.redirect("/login");
+    }
+}
+
+module.exports.forgotPassword = (req,res)=>{
+    res.render("./signup/forgotEmail.ejs");
+}
+
+module.exports.validatePassword = async(req,res)=>{
+    let {Re_email,password,Cpassword} = req.body;
+    console.log(Re_email);
+    let listingUser = await User.findOne({email:Re_email});
+    console.log(listingUser);
+    if(!listingUser){
+        req.flash("error","Account not found!!");
+        console.log("ERROR-A/c not found");
+        return res.redirect("/forgotPassword");
+    }
+    if(password!=Cpassword){
+        req.flash("error","write the both password correctly!");
+        return res.redirect("/forgotPassword");
+    }
+    await listingUser.setPassword(Cpassword);
+    await listingUser.save();
+    req.flash("success","Successfully Updated password!");
+    res.redirect("/login");
+}
