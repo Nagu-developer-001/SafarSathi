@@ -9,7 +9,7 @@ const passport = require("passport");
 
 const {isLogined,listOwner,UniqueUrl} = require("../AuthenticLogin.js");
 const {validateData} =require("../AuthenticLogin.js");
-const listingControllers = require("../controllers/listings.js")
+const listingControllers = require("../controllers/listings.js");
 
 //todo TESTING ROUTE
 router.get("/api/TestListings",async(req,res)=>{
