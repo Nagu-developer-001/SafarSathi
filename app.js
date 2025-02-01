@@ -69,10 +69,9 @@ app.use((req,res,next)=>{
     next();
 });
 
-
+app.use("/",otherCategory);
 app.use("/listings",listingRouter);
 app.use("/",userRouter);
-app.use("/",otherCategory);
 app.use("/",reviewsRouter);
 
 
