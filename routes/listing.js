@@ -50,7 +50,7 @@ router.get("/:id/edit",isLogined,listOwner,wrapAsync(listingControllers.editList
 //TODO UPDATE ROUTE
 router.put("/:id",isLogined,validateData,wrapAsync(listingControllers.updateList));
 //TODO DELETE ROUTE
-router.delete("/:id/del",isLogined,listOwner,wrapAsync(listingControllers.deleteList));
+router.delete("/:id",isLogined,listOwner,wrapAsync(listingControllers.deleteList));
 
 
 

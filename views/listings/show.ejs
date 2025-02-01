@@ -18,7 +18,7 @@
     <%if(nowUser && nowUser._id.equals(content.owner._id)){%>
             <div class="colbtn">
             <a href="http://localhost:8080/listings/<%= content._id %>/edit" class="btn btn-dark col-1 offset-2">edit</a>
-            <form action="http://localhost:8080/listings/<%= content._id %>/del?_method=DELETE" method="post">
+            <form action="http://localhost:8080/listings/<%= content._id %>?_method=DELETE" method="post">
                 <button class="btn btn-dark offset-4 add-btn">Delete</button>
             </form>
         </div>
