@@ -8,44 +8,15 @@ const flash = require("connect-flash");
 const crypto = require('crypto');
 const { saveUrl , UniqueUrl,validateRegister,setValues} = require("../AuthenticLogin.js");
 
-router.get("/signup", (req, res) => {
-    res.render("./signup/signup.ejs");
-});
+const userController = require("../controllers/users.js");
 
-router.post("/signup",validateRegister,saveUrl,async (req, res, next) => {
-    //const { email, username, password } = req.body;
-    res.redirect("/validateotp");
-});
-router.get("/validateotp",(req,res)=>{
-    res.render("./signup/otp.ejs");
-});
-router.post("/validateotp",async(req,res)=>{
-    let email = req.session.email;
-    let username = req.session.username;
-    let password = req.session.password;
-    let otp = req.body;
-    otp = otp.otp.join("");
-    if(otp == req.session.otp){
-        const newUser = new User({ email, username });
-        const regUser = await User.register(newUser, password);
-        console.log("sending email");
-        req.login(regUser, (err) => {
-            if (err) {
-                return next(err);
-            }
-            //requested url
-            req.flash("success","Welcome to SafarSathi");
-            res.redirect("/listings");
-        });
-    }else{
-        req.flash("error","You Entered wrong OTP");
-        res.redirect("/signup");
-    }
-});
+router.get("/signup",userController.renderSignUp);
 
-router.get("/login", (req, res) => {
-    res.render("./signup/login.ejs");
-});
+router.post("/signup",validateRegister,saveUrl,userController.readValidateSignUp);
+router.get("/validateotp",userController.otpRender);
+router.post("/validateotp",userController.validateOtp);
+
+router.get("/login",userController.loginUserRender);
 
 router.post(
     "/login",
@@ -54,11 +25,7 @@ router.post(
         failureRedirect: "/login",
         failureFlash: true,
     }),
-    (req, res) => {
-        const redirectUrl = res.locals.redirectUrl || "listings";
-        req.flash("success", "Welcome back to SafarSathi");
-        return res.redirect(redirectUrl);
-    }
+    userController.loginUser
 );
 
 router.get("/logout", (req, res, next) => {
