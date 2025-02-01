@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const placeList = require("../models/wonderLust.js");
 const Review = require("../models/review.js");
 
+const reviewControllers = require("../controllers/review.js");
+
+
 const ExpressErr = require("../utils/ExpressErr.js");
 
 const isvalid = (req,res,next)=>{
@@ -16,11 +19,11 @@ const {validateRating,isLogined,reviewOwner} = require("../AuthenticLogin.js");
 
 //TODO POSTING REVIEWS
 
-router.post("/listings/:id/reviews",isLogined,validateRating,wrapAsync(reviewCreate));
+router.post("/listings/:id/reviews",isLogined,validateRating,wrapAsync(reviewControllers.reviewCreate));
 
 
 //TODO DELETE REQUEST
-router.delete("/listings/:id/reviews/:reviewsId",isLogined,reviewOwner,wrapAsync(destroyReview));
+router.delete("/listings/:id/reviews/:reviewsId",isLogined,reviewOwner,wrapAsync(reviewControllers.destroyReview));
 
 
 module.exports = router;
