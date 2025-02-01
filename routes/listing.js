@@ -1,4 +1,9 @@
 const express = require("express");
+
+const multer  = require('multer')
+const upload = multer({dest:"uploads/"});
+
+
 const router = express.Router();
 const mongoose = require("mongoose");
 const placeList = require("../models/wonderLust.js");
@@ -30,7 +35,10 @@ router.get("/api/TestListings",async(req,res)=>{
 });
 router.route("/")
     .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE
-    .post(isLogined,validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
+    //.post(isLogined,validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
+    .post(upload.single('Listing[image]'),(req,res)=>{
+        console.log(req.file);
+    });
 //TODO NEW ROUTE
 router.get("/new",isLogined,wrapAsync(listingControllers.renderFrom));
 router.route("/:id")
