@@ -36,15 +36,15 @@ router.get("/api/TestListings",async(req,res)=>{
 });
 router.route("/")
     .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE
-    //.post(isLogined,validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
-    .post(upload.single('Listing[image]'),(req,res)=>{
-        console.log(req.file);
-    });
+    .post(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
+    //.post(upload.single('Listing[image]'),(req,res)=>{
+    //    console.log(req.file);
+    //});
 //TODO NEW ROUTE
 router.get("/new",isLogined,wrapAsync(listingControllers.renderFrom));
 router.route("/:id")
     .get(UniqueUrl,wrapAsync(listingControllers.getShow))//TODO SHOW ROUTE
-    .put(isLogined,validateData,wrapAsync(listingControllers.updateList))//TODO UPDATE ROUTE
+    .put(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.updateList))//TODO UPDATE ROUTE
     .delete(isLogined,listOwner,wrapAsync(listingControllers.deleteList))//TODO DELETE ROUTE
 //TODO EDIT ROUTE
 router.get("/:id/edit",isLogined,listOwner,wrapAsync(listingControllers.editList));

@@ -25,9 +25,13 @@ module.exports.createList = async(req,res)=>{
     // if(!req.body.Listing){
     //     next( new ExpressErr(402,"INTERNAL SERVER ERROR"));
     // }
+    let url = req.file.path;
+    let filename = req.file.filename;
     console.log("hello");
     let placeLists = req.body.Listing;
     placeLists.owner = req.user._id;
+    placeLists.image = {url,filename}
+    console.log(placeLists);
     let placeAdd = await listingController.insertMany(placeLists);
     console.log(placeAdd);
     req.flash("success","New Listing is Created!!!");
@@ -50,7 +54,11 @@ module.exports.editList = async(req,res)=>{
 }
 module.exports.updateList = async(req,res)=>{
     let {id} = req.params;
-    await listingController.findByIdAndUpdate(id,{...req.body.Listing});
+    let url = req.file.path;
+    let filename = req.file.filename;
+    let placeAdd = await listingController.findByIdAndUpdate(id,{...req.body.Listing});
+    placeAdd.image = {url,filename};
+    placeAdd.save();
     req.flash("success","Edited Successfully");
     res.redirect(`/listings/${id}`);
 }
