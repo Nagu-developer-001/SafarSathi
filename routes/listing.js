@@ -1,7 +1,7 @@
 const express = require("express");
 
 const multer  = require('multer');
-const storage = require("../cloudConfigure.js");
+const {storage} = require("../cloudConfigure.js");
 const upload = multer({ storage: storage });
 
 
