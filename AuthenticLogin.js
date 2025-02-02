@@ -18,8 +18,8 @@ module.exports.validateRegister = async(req,res,next)=>{
             //console.log(registration_process,"----1111");
             if(registration_process===null){
                 const send = require('gmail-send')({
-                    user: 'trivikramapvt.ltd786@gmail.com',
-                    pass: 'snsrjtbrzvuyhwbp',
+                    user: 'trivikramagroupofltd@gmail.com',//TODO - Trivikrama!1
+                    pass: 'fhzghygoufpdhunn',
                     to:   email,
                     subject: 'No Replay Email.',
                 });

@@ -1,5 +1,7 @@
-require('dotenv').config()
-console.log(process.env.SECRET);
+if(!process.env.NODE_ENV!="production"){
+    require('dotenv').config()
+}
+//console.log(process.env.CLOUD_NAME);
 
 const express = require("express");
 const app = express();
