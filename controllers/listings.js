@@ -54,11 +54,13 @@ module.exports.editList = async(req,res)=>{
 }
 module.exports.updateList = async(req,res)=>{
     let {id} = req.params;
+    let placeAdd = await listingController.findByIdAndUpdate(id,{...req.body.Listing});
+    if(typeof req.file !== "undefined"){
     let url = req.file.path;
     let filename = req.file.filename;
-    let placeAdd = await listingController.findByIdAndUpdate(id,{...req.body.Listing});
     placeAdd.image = {url,filename};
-    placeAdd.save();
+    await placeAdd.save();
+    }
     req.flash("success","Edited Successfully");
     res.redirect(`/listings/${id}`);
 }
