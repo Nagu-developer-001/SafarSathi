@@ -5,7 +5,7 @@ const cards = document.querySelectorAll(".card");
 const solid = document.querySelector(".solids");
 console.log(header,body,cards);
 const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
-if (isDarkMode==true){
+if (isDarkMode){
     solid.classList.add('dark-solid');
     header.classList.add('dark-mode');
     body.classList.add('dark-mode');
