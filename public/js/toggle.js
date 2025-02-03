@@ -10,7 +10,7 @@ if (isDarkMode){
     header.classList.add('dark-mode');
     body.classList.add('dark-mode');
     addBack();
-    darkModeToggle.checked = true;
+    darkModeToggle.checking = true;
 }
 darkModeToggle.addEventListener('change', () => {
     if (darkModeToggle.checked){
