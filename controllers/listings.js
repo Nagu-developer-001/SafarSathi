@@ -44,13 +44,15 @@ module.exports.editList = async(req,res)=>{
     console.log("Authenticated user : ",res.locals.nowUser._id);
     let content = await listingController.findById(id);
     console.log("owner id : -- :  ",content.owner._id);
-    //console.log(content);
+    console.log(content);
     if(!content){
         req.flash("error","This list is not exist!!");
         res.redirect("/listings");
     }else{
-        let urlPhoto = req.file.path;
-        urlPhoto = urlPhoto.replace("/uploads","/uploads/w_500");
+        let urlPhoto = content.image.url;
+        console.log(urlPhoto);
+        urlPhoto = urlPhoto.replace("/upload","/upload/h_200");
+        console.log(urlPhoto);
         res.render("listings/edit.ejs",{content,urlPhoto});
     }
 }
