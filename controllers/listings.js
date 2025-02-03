@@ -49,6 +49,7 @@ module.exports.editList = async(req,res)=>{
         req.flash("error","This list is not exist!!");
         res.redirect("/listings");
     }else{
+        
         res.render("listings/edit.ejs",{content});
     }
 }
