@@ -194,3 +194,19 @@ label{
 .dark{
     transition: 0.5s;
 }
+
+#filters{
+    /* margin-top:0.5rem; */
+    display:flex;
+    flex-wrap: wrap;
+}
+.fiter{
+    text-align: center;
+    margin-right: 3rem;
+    opacity:0.7;
+    transition: 1s;
+}
+.fiter:hover{
+    opacity: 1;
+    cursor: pointer;
+}
