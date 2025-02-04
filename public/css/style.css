@@ -198,7 +198,8 @@ label{
 #filters{
     /* margin-top:0.5rem; */
     display:flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 .filter{
     text-align: center;
