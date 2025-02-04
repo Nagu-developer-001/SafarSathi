@@ -42,16 +42,18 @@ label{
 .nav-link{
     color: #222222;
     opacity: 0.7;
-    transition:opacity 0.6s linear ,font-weight 0.6s linear !important;
-    transition: text-decoration-line 6s linear !important;
+    /* transition:opacity 0.6s linear ,font-weight 0.6s linear !important;
+    transition: text-decoration-line 6s linear !important; */
+    transition: 1s !important;
 }
 .nav-link:hover{
     opacity: 1;
-    font-weight: 450;
-    text-decoration-line: overline underline;
+    font-weight: 700;
+    /* text-decoration-line: overline underline;
     text-decoration-thickness: 3px;
     text-decoration-color: aqua;
-    text-decoration-style: dotted;
+    text-decoration-style: dotted; */
+
 }
 .f-clsss-links a{
     text-decoration: none;
