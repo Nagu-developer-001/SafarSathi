@@ -114,6 +114,7 @@ label{
 }
 .card-text{
     font-weight: 400;
+    display: inline;
 }
 .card .card-text:hover{
     font-size: 900;

@@ -1,6 +1,8 @@
 <%- layout("/layout/boilerplate") %>
 <style>
-    
+    .card-body i{
+        display:none;
+    }
 </style>
     <!-- <br> -->
     <!-- <h3>All Listing</h3> -->
@@ -63,8 +65,18 @@
                     <div class="card-body">
                     <p class="card-text"><b><%= list.title %></b><br>
                         Price :&#8377;<%= list.price.toLocaleString("en-IN") %></p>
+                        &nbsp;&nbsp;&nbsp;<i class="taxation">+18% GST</i>
                     </div>
                 </div>
             </a>
             <%}%>
     </div>
+<script>
+    let tax = document.querySelectorAll("#taxation");
+    console.log(tax);
+    let toggle = document.querySelector("#tax-toggle");
+    console.log(toggle);
+    // toggle.addEventListener("click",(e)=>{
+    //     tax.style.disply = "inline";
+    // });
+</script>
