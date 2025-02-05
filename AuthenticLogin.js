@@ -9,7 +9,7 @@ const { cache } = require("joi");
 
 module.exports.validateRegister = async(req,res,next)=>{
     try {
-        console.log("sending")
+        console.log("sending");
             const { email, username, password } = req.body;
             req.session.email = email;
             req.session.username = username;
@@ -18,7 +18,7 @@ module.exports.validateRegister = async(req,res,next)=>{
             //console.log(registration_process,"----1111");
             if(registration_process===null){
                 const send = require('gmail-send')({
-                    user: 'trivikramagroupofltd@gmail.com',//TODO - Trivikrama!1
+                    user: 'trivikramagroupofltd@gmail.com',//TODO - Trivikrama!1,Bhat987654321!-MAPBOX
                     pass: 'fhzghygoufpdhunn',
                     to:   email,
                     subject: 'No Replay Email.',

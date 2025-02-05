@@ -96,29 +96,29 @@ main().then((res)=>{
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/wonderLust");
 }
-app.use("/api",(req,res,next)=>{
-    console.log("This is middleware !!! for/here we do athentication");
-    next();
-});
+// app.use("/api",(req,res,next)=>{
+//     console.log("This is middleware !!! for/here we do athentication");
+//     next();
+// });
 //TODO CREATE ROUTE
-app.get("/registerDemoUser",async(req,res)=>{
-    let newuser = new User({
-        email:"user3@gmail.com",
-        username:"nagabhushana4"
-    });
-    let newDataDemo = await User.register(newuser,"helloworld");
-    res.send(newDataDemo);
-});
+// app.get("/registerDemoUser",async(req,res)=>{
+//     let newuser = new User({
+//         email:"user3@gmail.com",
+//         username:"nagabhushana4"
+//     });
+//     let newDataDemo = await User.register(newuser,"helloworld");
+//     res.send(newDataDemo);
+// });
 
 
-function validateErr(err){
-    console.log(err);
-    return err;
-}
-function castError(err){
-    console.log(err);
-    return err;
-}
+// function validateErr(err){
+//     console.log(err);
+//     return err;
+// }
+// function castError(err){
+//     console.log(err);
+//     return err;
+// }
 //TODO ERROR HANDILNG ROUTE
 //TODO PAGE NOT FOUND   USE BOOTSRAP ALERT COMPONENT
 app.all("*",(req,res,next)=>{
@@ -133,7 +133,8 @@ app.use((err, req, res, next) => {
     // }
 
     // // Set a default error status if one isn’t already set
-    let {statusCode=500,message="Something went wrong"} = err;
+    console.log(err);
+    let {statusCode=500,message="Page Not Found."} = err;
 
     // Render the error page with the message
     res.status(statusCode).render("./listings/error.ejs", { message });
