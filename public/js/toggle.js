@@ -3,7 +3,7 @@ const header = document.getElementsByClassName('navbar')[0];
 const body = document.querySelector(".dark");
 const cards = document.querySelectorAll(".card");
 const solid = document.querySelector(".solids");
-console.log(header,body,cards);
+//console.log(header,body,cards);
 const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
 if (isDarkMode){
     solid.classList.add('dark-solid');

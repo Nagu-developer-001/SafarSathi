@@ -64,7 +64,7 @@
                     <div class="card-img-overlay"></div>
                     <div class="card-body">
                     <p class="card-text"><b><%= list.title %></b><br>
-                        Price :&#8377;<%= list.price.toLocaleString("en-IN") %></p>
+                        Price :&#8377;<b class="price-tag"><%= list.price.toLocaleString("en-IN") %></b></p>
                         &nbsp;&nbsp;&nbsp;<i class="taxation">+18% GST</i>
                     </div>
                 </div>
@@ -72,10 +72,33 @@
             <%}%>
     </div>
 <script>
-    let tax = document.querySelectorAll("#taxation");
+    let priceTag = document.querySelectorAll(".card-text .price-tag");
+    let pcopy = priceTag.innerText.replace(/,/g, '');
+    let tax = document.querySelectorAll(".taxation");
     console.log(tax);
-    let toggle = document.querySelector("#tax-toggle");
+    let toggle = document.querySelector("#flexSwitchCheckDefault");
     console.log(toggle);
+    toggle.addEventListener("click",(e)=>{
+        for(info of tax){
+            if(info.style.display != "inline"){
+            info.style.display = "inline";
+            for(price of priceTag){
+        //let p =Number(price.innerText);
+        let p = price.innerText.replace(/,/g, '');
+        //console.log("price list - ",p)
+        //console.log(price.innerText)
+        sell = Math.floor((p*18)/100);
+        let sum = eval(Number(p)+sell);
+        console.log(sum);
+        price.innerText = sum;
+    }
+        }else{
+            info.style.display = "none";
+            price.innerText = pcopy;
+        }
+        }
+        
+    });
     // toggle.addEventListener("click",(e)=>{
     //     tax.style.disply = "inline";
     // });
