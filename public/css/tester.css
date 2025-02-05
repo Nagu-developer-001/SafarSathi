@@ -1,0 +1,87 @@
+/* brand logo */
+.logo{
+    color: yellow !important;
+}
+
+
+/* mode selector -> light/dark */
+.mode input{
+    display:none;
+}
+.mode i{
+    color:yellow;
+}
+
+.mode{
+    padding-top: 6px;
+    cursor: pointer;
+}
+
+
+/* navbar */
+nav{
+    background-color: #fe424d;
+}
+nav a{
+    font-family: sans-serif,arial;
+}
+
+
+/* filters */
+#filters{
+    display:flex;
+    flex-wrap: nowrap;
+}
+
+.filter,.tax-toggle .form-switch{
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.7;
+    transition:200ms;
+}
+.filter:hover,.tax-toggle .form-switch:hover{
+    opacity: 1;
+}
+
+
+/* listing cards */
+.card-list{
+    border:none !important;
+    font-size: large;
+    font-family: sans-serif;
+}
+.card-img-top{
+    height:20rem;
+    margin-right: 10px;
+    border-radius: 2rem !important;
+    width:100% !important;
+    object-fit: cover;
+}
+
+.listing-anch{
+    text-decoration: none;
+}
+
+
+/* footer  */
+.f-clsss-whole{
+    background-color: #fe424d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.f-clsss-links a{
+    text-decoration: none;
+}
+
+.f-clsss-socilac{
+    font-size: large;
+    justify-content: space-evenly;
+}
+.f-clsss-socilac ,.f-clsss-links{
+    color:yellow !important;
+}

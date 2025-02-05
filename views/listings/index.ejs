@@ -47,7 +47,7 @@
         <div class="tax-toggle">
             <div class="form-check-reverse form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">After Taxes</label>
+                <label class="form-check-label" for="flexSwitchCheckDefault">Add Taxes</label>
             </div>
         </div>
         
@@ -64,7 +64,8 @@
                     <div class="card-img-overlay"></div>
                     <div class="card-body">
                     <p class="card-text"><b><%= list.title %></b><br>
-                        Price :&#8377;<span class="price"><%= list.price.toLocaleString("en-IN") %></span><span class="taxPrice" style="display:none;"><%=list.price.toLocaleString("en-IN")%></span></p>
+                        Price :&#8377;<span class="price"><%= list.price.toLocaleString("en-IN") %></span>
+                        <span class="taxPrice" style="display:none;"><%=list.price.toLocaleString("en-IN")%></span></p>
                         &nbsp;&nbsp;&nbsp;<i class="taxation">+18% GST</i>
                     </div>
                 </div>
@@ -73,6 +74,8 @@
     </div>
 <script>
     let check = document.querySelector("#flexSwitchCheckDefault");
+    let taxLabel = document.querySelector(".tax-toggle .form-switch .form-check-label");
+    // console.log(taxLabel);
     let prices = document.querySelectorAll(".price");
     let taxPrice = document.querySelectorAll(".taxPrice");
     for(let i=0;i<prices.length;i++){
@@ -89,6 +92,7 @@
     check.addEventListener("change",()=>{
         // alert("Check box is ",check.checked)
         if(check.checked){
+            taxLabel.innerText = "Remove Taxes";
             for(price of prices){
                 price.style.display="none";
             }
@@ -96,6 +100,7 @@
                 tp.style.display="inline";
             }
         }else{
+            taxLabel.innerText = "Add Taxes";
             for(price of prices){
                 price.style.display="inline";
             }
