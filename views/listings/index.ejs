@@ -64,7 +64,7 @@
                     <div class="card-img-overlay"></div>
                     <div class="card-body">
                     <p class="card-text"><b><%= list.title %></b><br>
-                        Price :&#8377;<%= list.price.toLocaleString("en-IN") %></p>
+                        Price :&#8377;<span class="price"><%= list.price.toLocaleString("en-IN") %></span><span class="taxPrice" style="display:none;"><%=list.price.toLocaleString("en-IN")%></span></p>
                         &nbsp;&nbsp;&nbsp;<i class="taxation">+18% GST</i>
                     </div>
                 </div>
@@ -72,11 +72,36 @@
             <%}%>
     </div>
 <script>
-    let tax = document.querySelectorAll("#taxation");
-    console.log(tax);
-    let toggle = document.querySelector("#tax-toggle");
-    console.log(toggle);
-    // toggle.addEventListener("click",(e)=>{
-    //     tax.style.disply = "inline";
-    // });
+    let check = document.querySelector("#flexSwitchCheckDefault");
+    let prices = document.querySelectorAll(".price");
+    let taxPrice = document.querySelectorAll(".taxPrice");
+    for(let i=0;i<prices.length;i++){
+        let p = prices[i].innerText;
+        console.log(p);
+        p = p.replace(',','');
+        p = parseInt(p);
+        console.log(p);
+        // console.log("Price",p)
+        let tp = (p =p+ (p*18/100));
+        // console.log(p,"after tax",tp);
+        taxPrice[i].innerText = tp;
+    }
+    check.addEventListener("change",()=>{
+        // alert("Check box is ",check.checked)
+        if(check.checked){
+            for(price of prices){
+                price.style.display="none";
+            }
+            for(tp of taxPrice){
+                tp.style.display="inline";
+            }
+        }else{
+            for(price of prices){
+                price.style.display="inline";
+            }
+            for(tp of taxPrice){
+                tp.style.display="none";
+            }
+        }
+    })
 </script>
