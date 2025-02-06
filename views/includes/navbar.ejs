@@ -29,10 +29,10 @@
         <div class="navbar-nav">
         <label class="mode">
             <input type="checkbox" id="darkModeToggle">
-            <i class="fa-solid fa-mountain-sun"></i>
+            <i class="fa-solid fa-moon dark-logo"></i>
         </label>
         <!-- <a class="nav-link " href="/">Home</a> -->
-        <a class="nav-link" href="/listings">Explore</a>
+        <a class="nav-link nav-text" href="/listings">Explore</a>
         </div>
         <div class="navbar-nav ms-auto">
             <form class="d-flex" role="search">
@@ -44,13 +44,13 @@
         
         </div>
         <div class="navbar-nav ms-auto">
-            <a class="nav-link" href="/listings/new">Add New Listing</a>
+            <a class="nav-link nav-text" href="/listings/new">Add New Listing</a>
             <%if(!nowUser){%>
-            <a class="nav-link " href="/signup"><b>Sign-Up</b></a>
-            <a class="nav-link" href="/login"><b>Login</b></a>
+            <a class="nav-link nav-text" href="/signup"><b>Sign-Up</b></a>
+            <a class="nav-link nav-text" href="/login"><b>Login</b></a>
             <%}%>
             <% if(nowUser) {%>
-            <a class="nav-link" href="/logout"><b>Logout</b></a>
+            <a class="nav-link nav-text" href="/logout"><b>Logout</b></a>
             <% } %>
             </div>
     </div>

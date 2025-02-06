@@ -9,7 +9,7 @@
     display:none;
 }
 .mode i{
-    color:yellow;
+    color:#ffc;
 }
 
 .mode{
@@ -21,6 +21,7 @@
 /* navbar */
 nav{
     background-color: #fe424d;
+    transition: 2s;
 }
 nav a{
     font-family: sans-serif,arial;
@@ -31,6 +32,8 @@ nav a{
 #filters{
     display:flex;
     flex-wrap: nowrap;
+    /* background-color: #fe424d; */
+    /* color:white; */
 }
 
 .filter,.tax-toggle .form-switch{
@@ -41,6 +44,7 @@ nav a{
     cursor: pointer;
     opacity: 0.7;
     transition:200ms;
+    /* background-color: red; */
 }
 .filter:hover,.tax-toggle .form-switch:hover{
     opacity: 1;
@@ -55,7 +59,7 @@ nav a{
 }
 .card-img-top{
     height:20rem;
-    margin-right: 10px;
+    margin-right: 10vw;
     border-radius: 2rem !important;
     width:100% !important;
     object-fit: cover;
@@ -84,4 +88,18 @@ nav a{
 }
 .f-clsss-socilac ,.f-clsss-links{
     color:yellow !important;
+}
+
+
+/* dark-mode */
+/* dark-nav */
+.dark-nav{
+    background-color: #33363d;
+    transition: 2s;
+}
+
+/* dark-card */
+.dark-card{
+    background-color: #33363d !important;
+    color:#fff !important;
 }
