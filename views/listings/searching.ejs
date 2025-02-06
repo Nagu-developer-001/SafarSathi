@@ -19,7 +19,7 @@
     .anc-price{
         text-decoration: none;
     }
-    button{
+    .hstack button{
         line-height: 1rem;
     }
 </style>
@@ -74,25 +74,20 @@
     </div>
     <br>
     <div class="stack-div">
+        <form action="/priceRange" method="get">
+
+        </form>
         <div class="hstack gap-3">
-            <button><a href="/priceRange" class="anc-price" style="text-decoration: none;">₹0 - ₹50</a></button>
-            <button><a href="/priceRange" class="anc-price">₹51 - ₹100</a></button>
-            <button><a href="/priceRange" class="anc-price">₹101 - ₹200</a></button>
-            <button><a href="/priceRange" class="anc-price">₹201 - ₹500</a></button>
-            <button><a href="/priceRange" class="anc-price">₹1001 - ₹2000</a></button>
-            <button><a href="/priceRange" class="anc-price">₹2001 - ₹5000</a></button>
-            <button><a href="/priceRange" class="anc-price">₹5001 - ₹10000</a></button>
-            <button><a href="/priceRange" class="anc-price">₹10001 - ₹100000</a></button>
-            
-            
-            
-            
-            
-            
-            
+            <button><a  href="/priceRange" class="anc-price" style="text-decoration: none;">₹0 - ₹50</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹51 - ₹100</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹101 - ₹200</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹201 - ₹500</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹1001 - ₹2000</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹2001 - ₹5000</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹5001 - ₹10000</a></button>
+            <button><a href="/priceRange" class="anc-price" onclick="submitPriceRange(event)">₹10001 - ₹100000</a></button>
         </div>
     </div>
-    
     <!-- <form action="listing/new" method="get">
         <button>new</button>
     </form> -->
@@ -156,6 +151,12 @@
             }
         }
     });
+    function submitPriceRange(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+            const priceRangeText = event.target.innerText;
+            // Redirect with query parameter
+            window.location.href = `/priceRange?priceRangeText=${encodeURIComponent(priceRangeText)}`;
+        }
     // toggle.addEventListener("click",(e)=>{
     //     tax.style.disply = "inline";
     // });

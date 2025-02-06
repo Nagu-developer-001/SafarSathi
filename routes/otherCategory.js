@@ -9,6 +9,7 @@ router.get("/search",async(req,res)=>{
     let {searchQuery} =  req.query;
     let pricers = searchQuery.match(/\d+/g);
     if(searchQuery){
+        req.session.searchQuery = searchQuery;
         if(pricers){
             console.log(pricers);
         let maxPrice = null;
@@ -36,5 +37,39 @@ router.get("/search",async(req,res)=>{
         console.log(`searching for ${searchQuery}`);
         res.render("listings/searching.ejs",{allListing});
     }
+});
+router.get("/priceRange",async(req,res)=>{
+    let searchQuery = req.session.searchQuery;
+    let prices = req.query.priceRangeText.match(/\d+/g);
+    let maxPrice = null;
+    let minPrice = Math.pow(10,1000);
+    for(let price of prices){
+        if(maxPrice<price){
+            maxPrice = price;
+        }
+    }
+    for(let price of prices){
+        if(minPrice>price){
+            minPrice = price;
+        }
+    }
+    let allListing = [];
+    //console.log(maxPrice,minPrice);
+    let perticular_list = await placeList.find({title:{  $regex: searchQuery,$options: 'i' }});
+    for(list of perticular_list){
+        //console.log(list.price);
+        
+    }
+    for(let i=0;i<perticular_list.length;i++){
+        if(perticular_list[i].price>=minPrice && perticular_list[i].price<=maxPrice){
+            //console.log(perticular_list[i].image.url);
+            allListing.push(perticular_list[i]);
+        }
+    }
+    console.log(allListing);
+    //for(list of allListing){
+       // console.log(list);
+    //}
+    res.render("listings/searching.ejs",{allListing});
 });
 module.exports = router;
