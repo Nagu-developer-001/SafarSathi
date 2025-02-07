@@ -34,6 +34,10 @@ router.get("/api/TestListings",async(req,res)=>{
         let x = await placeList.insertMany(place);
         console.log(x);
 });
+router.get('/:category', (req, res) => {
+    const category = req.params.category;
+    console.log(category);
+});
 router.route("/")
     .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE
     .post(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE

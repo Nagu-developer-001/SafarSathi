@@ -77,6 +77,7 @@ app.use((req,res,next)=>{
     console.log(res.locals.success)
     next();
 });
+
 app.use("/",otherCategory);
 app.use("/listings",listingRouter);
 app.use("/",userRouter);

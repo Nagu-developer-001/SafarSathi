@@ -1,8 +1,9 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({mergeParams:true});
 const placeList = require("../models/wonderLust.js");
 const {UniqueUrl} = require("../AuthenticLogin.js");
 let otherCategoryController = require("../controllers/otherCategory.js");
+
 router.get("/listings/FAQ",UniqueUrl,otherCategoryController.renderFAQ);
 router.get("/listings/help",UniqueUrl,otherCategoryController.renderHelp);
 router.get("/search",async(req,res)=>{
@@ -72,4 +73,5 @@ router.get("/priceRange",async(req,res)=>{
     //}
     res.render("listings/searching.ejs",{allListing});
 });
+
 module.exports = router;
