@@ -70,7 +70,7 @@ router.get("/priceRange",async(req,res)=>{
     }else{
         console.log(catFiler,minPrice,maxPrice);
         let perticular_list = await placeList.find({category:catFiler,price:{$gte:parseInt(maxPrice),$lte:parseInt(minPrice)}});
-        console.log(perticular_list);
+        console.log();
         allListing = perticular_list;
     }
     //console.log(maxPrice,minPrice);
