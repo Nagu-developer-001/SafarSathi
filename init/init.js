@@ -12,151 +12,163 @@ main().then((res) =>{
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/wonderLust")
 }
-const sampleListings = [
-    {
-      title: "Cozy Beachfront Cottage",
-      description:
-        "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 1500,
-      location: "Malibu",
-      country: "United States",
+const sampleListingsWithCategories = [
+  {
+    title: "Cozy Beachfront Cottage",
+    description:
+      "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Modern Loft in Downtown",
-      description:
-        "Stay in the heart of the city in this stylish loft apartment. Perfect for urban explorers!",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 1200,
-      location: "New York City",
-      country: "United States",
+    price: 1500,
+    location: "Malibu",
+    country: "United States",
+    category: "Waterfall",
+  },
+  {
+    title: "Modern Loft in Downtown",
+    description:
+      "Stay in the heart of the city in this stylish loft apartment. Perfect for urban explorers!",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Mountain Retreat",
-      description:
-        "Unplug and unwind in this peaceful mountain cabin. Surrounded by nature, it's a perfect place to recharge.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 1000,
-      location: "Aspen",
-      country: "United States",
+    price: 1200,
+    location: "New York City",
+    country: "United States",
+    category: "iconicCities",
+  },
+  {
+    title: "Mountain Retreat",
+    description:
+      "Unplug and unwind in this peaceful mountain cabin. Surrounded by nature, it's a perfect place to recharge.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Historic Villa in Tuscany",
-      description:
-        "Experience the charm of Tuscany in this beautifully restored villa. Explore the rolling hills and vineyards.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 2500,
-      location: "Florence",
-      country: "Italy",
+    price: 1000,
+    location: "Aspen",
+    country: "United States",
+    category: "Mountains",
+  },
+  {
+    title: "Historic Villa in Tuscany",
+    description:
+      "Experience the charm of Tuscany in this beautifully restored villa. Explore the rolling hills and vineyards.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Secluded Treehouse Getaway",
-      description:
-        "Live among the treetops in this unique treehouse retreat. A true nature lover's paradise.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 800,
-      location: "Portland",
-      country: "United States",
+    price: 2500,
+    location: "Florence",
+    country: "Italy",
+    category: "iconicCities",
+  },
+  {
+    title: "Secluded Treehouse Getaway",
+    description:
+      "Live among the treetops in this unique treehouse retreat. A true nature lover's paradise.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Beachfront Paradise",
-      description:
-        "Step out of your door onto the sandy beach. This beachfront condo offers the ultimate relaxation.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 2000,
-      location: "Cancun",
-      country: "Mexico",
+    price: 800,
+    location: "Portland",
+    country: "United States",
+    category: "Camping",
+  },
+  {
+    title: "Beachfront Paradise",
+    description:
+      "Step out of your door onto the sandy beach. This beachfront condo offers the ultimate relaxation.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Rustic Cabin by the Lake",
-      description:
-        "Spend your days fishing and kayaking on the serene lake. This cozy cabin is perfect for outdoor enthusiasts.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 900,
-      location: "Lake Tahoe",
-      country: "United States",
+    price: 2000,
+    location: "Cancun",
+    country: "Mexico",
+    category: "Waterfall",
+  },
+  {
+    title: "Rustic Cabin by the Lake",
+    description:
+      "Spend your days fishing and kayaking on the serene lake. This cozy cabin is perfect for outdoor enthusiasts.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Luxury Penthouse with City Views",
-      description:
-        "Indulge in luxury living with panoramic city views from this stunning penthouse apartment.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 3500,
-      location: "Los Angeles",
-      country: "United States",
+    price: 900,
+    location: "Lake Tahoe",
+    country: "United States",
+    category: "Camping",
+  },
+  {
+    title: "Luxury Penthouse with City Views",
+    description:
+      "Indulge in luxury living with panoramic city views from this stunning penthouse apartment.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Ski-In/Ski-Out Chalet",
-      description:
-        "Hit the slopes right from your doorstep in this ski-in/ski-out chalet in the Swiss Alps.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 3000,
-      location: "Verbier",
-      country: "Switzerland",
+    price: 3500,
+    location: "Los Angeles",
+    country: "United States",
+    category: "iconicCities",
+  },
+  {
+    title: "Ski-In/Ski-Out Chalet",
+    description:
+      "Hit the slopes right from your doorstep in this ski-in/ski-out chalet in the Swiss Alps.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Safari Lodge in the Serengeti",
-      description:
-        "Experience the thrill of the wild in a comfortable safari lodge. Witness the Great Migration up close.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 4000,
-      location: "Serengeti National Park",
-      country: "Tanzania",
+    price: 3000,
+    location: "Verbier",
+    country: "Switzerland",
+    category: "Mountains",
+  },
+  {
+    title: "Safari Lodge in the Serengeti",
+    description:
+      "Experience the thrill of the wild in a comfortable safari lodge. Witness the Great Migration up close.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Historic Canal House",
-      description:
-        "Stay in a piece of history in this beautifully preserved canal house in Amsterdam's iconic district.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FtcGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 1800,
-      location: "Amsterdam",
-      country: "Netherlands",
+    price: 4000,
+    location: "Serengeti National Park",
+    country: "Tanzania",
+    category: "Farms",
+  },
+  {
+    title: "Historic Canal House",
+    description:
+      "Stay in a piece of history in this beautifully preserved canal house in Amsterdam's iconic district.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FtcGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     },
-    {
-      title: "Private Island Retreat",
-      description:
-        "Have an entire island to yourself for a truly exclusive and unforgettable vacation experience.",
-      image: {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9kZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      price: 10000,
-      location: "Fiji",
-      country: "Fiji",
+    price: 1800,
+    location: "Amsterdam",
+    country: "Netherlands",
+    category: "iconicCities",
+  },
+  {
+    title: "Private Island Retreat",
+    description:
+      "Have an entire island to yourself for a truly exclusive and unforgettable vacation experience.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9kZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
     },
+    price: 10000,
+    location: "Fiji",
+    country: "Fiji",
+    category: "Waterfall",
+  },
     {
       title: "Charming Cottage in the Cotswolds",
       description:
@@ -168,6 +180,7 @@ const sampleListings = [
       price: 1200,
       location: "Cotswolds",
       country: "United Kingdom",
+      category: "Waterfall",
     },
     {
       title: "Historic Brownstone in Boston",
@@ -180,6 +193,7 @@ const sampleListings = [
       price: 2200,
       location: "Boston",
       country: "United States",
+      category: "Waterfall",
     },
     {
       title: "Beachfront Bungalow in Bali",
@@ -192,6 +206,7 @@ const sampleListings = [
       price: 1800,
       location: "Bali",
       country: "Indonesia",
+      category: "Waterfall",
     },
     {
       title: "Mountain View Cabin in Banff",
@@ -204,6 +219,7 @@ const sampleListings = [
       price: 1500,
       location: "Banff",
       country: "Canada",
+      category: "Waterfall",
     },
     {
       title: "Art Deco Apartment in Miami",
@@ -216,6 +232,7 @@ const sampleListings = [
       price: 1600,
       location: "Miami",
       country: "United States",
+      category: "Waterfall",
     },
     {
       title: "Tropical Villa in Phuket",
@@ -228,6 +245,7 @@ const sampleListings = [
       price: 3000,
       location: "Phuket",
       country: "Thailand",
+      category: "Waterfall",
     },
     {
       title: "Historic Castle in Scotland",
@@ -240,6 +258,7 @@ const sampleListings = [
       price: 4000,
       location: "Scottish Highlands",
       country: "United Kingdom",
+      category: "Waterfall",
     },
     {
       title: "Desert Oasis in Dubai",
@@ -252,6 +271,7 @@ const sampleListings = [
       price: 5000,
       location: "Dubai",
       country: "United Arab Emirates",
+      category: "Waterfall",
     },
     {
       title: "Rustic Log Cabin in Montana",
@@ -264,6 +284,7 @@ const sampleListings = [
       price: 1100,
       location: "Montana",
       country: "United States",
+      category: "Waterfall",
     },
     {
       title: "Beachfront Villa in Greece",
@@ -276,6 +297,7 @@ const sampleListings = [
       price: 2500,
       location: "Mykonos",
       country: "Greece",
+      category: "Waterfall",
     },
     {
       title: "Eco-Friendly Treehouse Retreat",
@@ -288,6 +310,7 @@ const sampleListings = [
       price: 750,
       location: "Costa Rica",
       country: "Costa Rica",
+      category: "Waterfall",
     },
     {
       title: "Historic Cottage in Charleston",
@@ -300,6 +323,7 @@ const sampleListings = [
       price: 1600,
       location: "Charleston",
       country: "United States",
+      category: "Waterfall",
     },
     {
       title: "Modern Apartment in Tokyo",
@@ -312,6 +336,7 @@ const sampleListings = [
       price: 2000,
       location: "Tokyo",
       country: "Japan",
+      category: "Waterfall",
     },
     {
       title: "Lakefront Cabin in New Hampshire",
@@ -324,6 +349,7 @@ const sampleListings = [
       price: 1200,
       location: "New Hampshire",
       country: "United States",
+      category: "Waterfall",
     },
     {
       title: "Luxury Villa in the Maldives",
@@ -336,6 +362,7 @@ const sampleListings = [
       price: 6000,
       location: "Maldives",
       country: "Maldives",
+      category: "Waterfall",
     },
     {
       title: "Ski Chalet in Aspen",
@@ -348,6 +375,7 @@ const sampleListings = [
       price: 4000,
       location: "Aspen",
       country: "United States",
+      category: "Waterfall",
     },
     {
       title: "Secluded Beach House in Costa Rica",
@@ -360,6 +388,7 @@ const sampleListings = [
       price: 1800,
       location: "Costa Rica",
       country: "Costa Rica",
+      category: "Waterfall",
     },
   ];
   
@@ -370,4 +399,4 @@ const sampleListings = [
 //     console.log(err);
 // });
 
-module.exports = {data:sampleListings};
+module.exports = {data:sampleListingsWithCategories};

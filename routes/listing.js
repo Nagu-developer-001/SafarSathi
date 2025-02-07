@@ -35,25 +35,30 @@ router.get("/api/TestListings",async(req,res)=>{
         console.log(x);
 });
 
-router.get('/:category', (req, res) => {
-    const category = req.params.category;
+router.get('/:category', async(req, res) => {
+    const categori = req.params.category;
+    req.session.catFiler = categori;
     //console.log(category);
     let categories = {
         Trending:"hhegih",
         rooms:"kshuff",
-        iconicCities:"",
-        Mountains:"",
-        Castles:"",
-        Religion:"",
-        Camping:"",
-        Farms:"",
-        Arctic:"",
-        Waterfall:""
+        iconicCities:"sdfgb",
+        Mountains:"cvbn",
+        Castles:"qwert",
+        Religion:"cvb",
+        Camping:"vbn ",
+        Farms:"xcfvgbh",
+        Arctic:"khsdgdv",
+        Waterfall:"hjsbf"
     };
-    if(categories[category]){
-        console.log(categories[category]);
+    if(categories[categori]){
+        allListing = await placeList.find({category:categori});
+        //console.log(allListing);
+        res.render("listings/searching.ejs",{allListing});
+    }else{
+        console.log("no data found");
     }
-    console.log("category - ",categories[category]);
+    //console.log("category - ",categories[category]);
 });
 router.route("/")
     .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE
