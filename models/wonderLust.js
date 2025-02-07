@@ -23,6 +23,10 @@ const placeSchema =  new Schema({
     country:{
         type:String,
     },
+    category:{
+        type:String,
+        enum:["Trending","rooms","iconicCities","Mountains","Castles","Religion","Camping","Farms","Arctic","Waterfall"]
+    },
     reviews:[
         {
             type:Schema.Types.ObjectId,
