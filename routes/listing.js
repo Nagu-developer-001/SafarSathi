@@ -1,7 +1,7 @@
 const express = require("express");
 
 const multer  = require('multer');
-const {storage} = require("../cloudConfigure.js");
+const {} = require("../cloudConfigure.js");
 const upload = multer({ storage: storage });
 
 
@@ -47,7 +47,7 @@ router.get('/list/:category', async(req, res) => {
     let categories = {
         Trending:"hhegih",
         rooms:"kshuff",
-        iconicCities:"sdfgb",
+        Iconiccities:"sdfgb",
         Mountains:"cvbn",
         Castles:"qwert",
         Religion:"cvb",

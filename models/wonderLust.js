@@ -25,7 +25,7 @@ const placeSchema =  new Schema({
     },
     category:{
         type:String,
-        enum:["Trending","rooms","iconicCities","Mountains","Castles","Religion","Camping","Farms","Arctic","Waterfall"]
+        enum:["Trending","rooms","Iconiccities","Mountains","Castles","Religion","Camping","Farms","Arctic","Waterfall"]
     },
     reviews:[
         {
