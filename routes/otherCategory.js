@@ -43,10 +43,12 @@ router.get("/priceRange",async(req,res)=>{
     let searchQuery = req.session.searchQuery;
     let prices = req.query.priceRangeText.match(/\d+/g);
     console.log(prices);
+    // prices = parseInt(prices);
     let maxPrice = null;
     let minPrice = Math.pow(10,1000);
     for(let price of prices){
-        if(maxPrice<price){
+        console.log(parseInt(price));
+        if(maxPrice<parseInt(price)){
             maxPrice = price;
         }
     }
@@ -56,8 +58,8 @@ router.get("/priceRange",async(req,res)=>{
         }
     }
     let catFiler = req.session.catFiler;
-    //console.log(catFiler);
-    //console.log(maxPrice,minPrice);
+    console.log(catFiler);
+    console.log("min price - ",minPrice,"max price - ",maxPrice);
     let allListing = [];
     if(searchQuery){
         let perticular_list = await placeList.find({title:{  $regex: searchQuery,$options: 'i' }});
@@ -69,11 +71,11 @@ router.get("/priceRange",async(req,res)=>{
         }
     }else{
         console.log(catFiler,minPrice,maxPrice);
-        let perticular_list = await placeList.find({category:catFiler,price:{$gte:parseInt(maxPrice),$lte:parseInt(minPrice)}});
+        let perticular_list = await placeList.find({category:catFiler,price:{$gte:parseInt(minPrice),$lte:parseInt(maxPrice)}});
         console.log(perticular_list);
         allListing = perticular_list;
     }
-    //console.log(maxPrice,minPrice);
+    
     
     // for(list of perticular_list){
     //     //console.log(list.price);

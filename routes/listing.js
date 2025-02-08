@@ -34,8 +34,13 @@ router.get("/api/TestListings",async(req,res)=>{
         let x = await placeList.insertMany(place);
         console.log(x);
 });
-
-router.get('/:category', async(req, res) => {
+//TODO NEW ROUTE
+router.get("/new",isLogined,wrapAsync(listingControllers.renderFrom));
+router.route("/:id")
+    .get(UniqueUrl,wrapAsync(listingControllers.getShow))//TODO SHOW ROUTE
+    .put(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.updateList))//TODO UPDATE ROUTE
+    .delete(isLogined,listOwner,wrapAsync(listingControllers.deleteList))//TODO DELETE ROUTE
+router.get('/list/:category', async(req, res) => {
     const categori = req.params.category;
     req.session.catFiler = categori;
     //console.log(category);
@@ -66,12 +71,7 @@ router.route("/")
     //.post(upload.single('Listing[image]'),(req,res)=>{
     //    console.log(req.file);
     //});
-//TODO NEW ROUTE
-router.get("/new",isLogined,wrapAsync(listingControllers.renderFrom));
-router.route("/:id")
-    .get(UniqueUrl,wrapAsync(listingControllers.getShow))//TODO SHOW ROUTE
-    .put(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.updateList))//TODO UPDATE ROUTE
-    .delete(isLogined,listOwner,wrapAsync(listingControllers.deleteList))//TODO DELETE ROUTE
+
 //TODO EDIT ROUTE
 router.get("/:id/edit",isLogined,listOwner,wrapAsync(listingControllers.editList));
 
