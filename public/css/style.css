@@ -24,7 +24,7 @@ label{
     padding-right: 6px;
 }
 .navbar-expand-md{
-    background-color: white;
+    background-color: yellow;
     height: 5rem;
     transition: 0.5s;
 }
