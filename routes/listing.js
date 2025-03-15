@@ -66,8 +66,10 @@ router.get('/list/:category', async(req, res) => {
     //console.log("category - ",categories[category]);
 });
 router.route("/")
-    .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE
-    .post(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
+    .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE//-,validateData,wrapAsync(listingControllers.createList
+    .post(isLogined,upload.single('Listing[image]'),(req,res)=>{
+        res.send(req.file);
+    })//TODO CREATE ROUTE
     //.post(upload.single('Listing[image]'),(req,res)=>{
     //    console.log(req.file);
     //});

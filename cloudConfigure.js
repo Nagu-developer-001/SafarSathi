@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'SafarSathi_DEVOP_Phase',
+    folder: 'SafarSathi_DEVOLOPMENT_Phase',
     allowedformats: ["png","jpeg","jpg"],
   },
 });
