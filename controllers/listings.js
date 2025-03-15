@@ -9,7 +9,7 @@ module.exports.renderFrom = (req,res)=>{
     console.log(req.locals);
     res.render("listings/newForm.ejs");
 }
-module.exports. = async(req,res,next)=>{
+module.exports.getShow = async(req,res,next)=>{
     let {id} = req.params;
     console.log(id,"this is id");
     let content = await listingController.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
