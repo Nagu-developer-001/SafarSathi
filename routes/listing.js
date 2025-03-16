@@ -37,7 +37,7 @@ router.get("/api/TestListings",async(req,res)=>{
 //TODO NEW ROUTE
 router.get("/new",isLogined,wrapAsync(listingControllers.renderFrom));
 router.route("/:id")
-    .get(wrapAsync(listingControllers.getShow))//TODO SHOW ROUTE
+    .get(wrapAsync(listingControllers.))//TODO SHOW ROUTE
     .put(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.updateList))//TODO UPDATE ROUTE
     .delete(isLogined,listOwner,wrapAsync(listingControllers.deleteList))//TODO DELETE ROUTE
 router.get('/list/:category', async(req, res) => {
@@ -67,9 +67,7 @@ router.get('/list/:category', async(req, res) => {
 });
 router.route("/")
     .get(wrapAsync(listingControllers.index))//TODO INDEX ROUTE//-,validateData,wrapAsync(listingControllers.createList
-    .post(isLogined,upload.single('Listing[image]'),(req,res)=>{
-        res.send(req.file);
-    })//TODO CREATE ROUTE
+    .post(isLogined,upload.single('Listing[image]'),validateData,wrapAsync(listingControllers.createList))//TODO CREATE ROUTE
     //.post(upload.single('Listing[image]'),(req,res)=>{
     //    console.log(req.file);
     //});
