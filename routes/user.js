@@ -28,6 +28,14 @@ router.post(
     userController.loginUser
 );
 
+router.get("/userDetails",(req,res)=>{
+    console.log(req.);
+    // res.send(req.user);
+    let user = req.user;
+    res.render("./signup/userDetails.ejs",{user});
+});
+
+
 router.get("/logout", userController.logoutUser);
 router.get("/forgotPassword",userController.forgotPassword);
 
