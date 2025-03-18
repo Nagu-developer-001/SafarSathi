@@ -29,7 +29,7 @@ router.post(
 );
 
 router.get("/userDetails",(req,res)=>{
-    console.log(req.user);
+    console.log(req.);
     // res.send(req.user);
     let user = req.user;
     res.render("./signup/userDetails.ejs",{user});
