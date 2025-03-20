@@ -4,6 +4,7 @@ const User = require("./models/user.js");
 let ExpressErr = require("./utils/ExpressErr.js");
 const {validateUserData} = require("./joiSchema.js");
 const {validateUserRating} = require("./joiSchema.js");
+const {validateUpdateUser} = require("./joiSchema.js");
 const crypto = require('crypto');
 const { cache } = require("joi");
 
@@ -19,7 +20,7 @@ module.exports.validateRegister = async(req,res,next)=>{
             if(registration_process===null){
                 const send = require('gmail-send')({
                     user: 'trivikramagroupofltd@gmail.com',//TODO - Trivikrama!1,Bhat987654321!-MAPBOX
-                    pass: 'fhzghygoufpdhunn',
+                    pass: 'szinrtyyqykbyzxu',
                     to:   email,
                     subject: 'No Replay Email.',
                 });
@@ -90,6 +91,19 @@ module.exports.isLogined = (req, res, next) => {
         return res.redirect("/login");
     }
     next();
+};
+
+module.exports.validateUpdateUser = (req,res,next) =>{
+    if (req.isAuthenticated()) {
+        let err = validateUpdateUser.validate(req.body);
+        if(!err){
+            let errMsg = err.details.map((el)=>el.message).join(",");
+            console.log("error occuring");
+            throw new ExpressErr(500,errMsg); 
+        }
+        console.log("hllo error")
+        next();
+    }
 };
 module.exports.UniqueUrl = (req,res,next)=>{
     req.session.redirectUrlUnique = req.originalUrl;

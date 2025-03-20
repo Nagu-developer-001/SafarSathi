@@ -2,27 +2,40 @@
 <body>
     <div class="row mt-3">
         <div class="col-6 offset-3">
-            <form action="http://localhost:8080/updataUser" method="post" class="needs-validation" novalidate autocomplete="off">
+            <b><h2>Want to Update Your Profile? </h2></b>
+            //<%=// user.image.url %>
+            <form action="http://localhost:8080/updataUser" method="post" class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
+                <% if(!user.image.url){%> 
+                    <img src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg" alt="" style="height:170px;border-radius:50%;position: relative;">
+                <!-- <h4><%=//nowUser.image%></h4>  -->
+                <% }else{ %> 
+                    <img src="<%=user.image.url%>" style="height:150px;width:150px;border-radius:50%;position: relative;">
+                <% } %>
+                <div class="mb-3">
+                    <label for="image" class="form-label">You can upload your new image : </label>
+                    <input type="file" src="" alt="" name="userData[image]" placeholder="Enter URL" class="form-control">    
+            </div>
+                    <div class="mb-2">
+                        <label for="username" class="form-label">Name :</label>
+                        <div class="input-container">
+                            <input type="text" id="username" name="userData[username]" required class="form-control" value="<%= user.username %>">
+                            <i class="fa-solid fa-pen-fancy icon"></i>
+                        </div>
+                    </div>
+    
+                    <!-- Email Field -->
+                    <div class="mb-2">
+                        <label for="email" class="form-label">Email :</label>
+                        <div class="input-container">
+                            <input type="email" id="email" name="userData[email]" required class="form-control" value="<%= user.email %>">
+                            <i class="fa-solid fa-pen-fancy icon"></i>
+                        </div>
+                    </div>
+                <input type="submit" value="Update" class="btn btn-success">
+                </form>
                 
                 <!-- Name Field -->
-                <div class="mb-2">
-                    <label for="username" class="form-label">Name :</label>
-                    <div class="input-container">
-                        <input type="text" id="username" name="username" required class="form-control" value="<%= user.username %>">
-                        <i class="fa-solid fa-pen-fancy icon"></i>
-                    </div>
-                </div>
-
-                <!-- Email Field -->
-                <div class="mb-2">
-                    <label for="email" class="form-label">Email :</label>
-                    <div class="input-container">
-                        <input type="email" id="email" name="email" required class="form-control" value="<%= user.email %>">
-                        <i class="fa-solid fa-pen-fancy icon"></i>
-                    </div>
-                </div>
-
-            </form>
+                
         </div>
     </div>
 

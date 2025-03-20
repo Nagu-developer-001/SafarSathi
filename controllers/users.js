@@ -43,7 +43,12 @@ module.exports.loginUser = (req, res) => {
     req.flash("success", "Welcome back to SafarSathi");
     return res.redirect(redirectUrl);
 }
-
+module.exports.updataUser = (req,res) =>{
+    console.log(req.body);
+    // let url = req.file.path;
+    // let filename = req.file.filename;
+    console.log(req);
+}
 module.exports.logoutUser = (req, res, next) => {
     if (req.isAuthenticated()) {
         req.logout((err) => {

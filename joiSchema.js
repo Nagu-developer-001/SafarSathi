@@ -17,3 +17,11 @@ module.exports.validateUserRating = Joi.object({
         comment:Joi.string().required(),
     }).required(),
 });
+
+module.exports.validateUpdateUser = Joi.object({
+    userData:Joi.object({
+        username:Joi.string(),
+        email:Joi.string(),
+        image:Joi.object({url:Joi.string()})
+    })
+});
