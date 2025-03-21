@@ -41,7 +41,7 @@ router.get("/userDetails/:id",async(req,res)=>{
     let user = await User.findById(id);
     // //let data = await User.find({username:user.username});
     // console.log(user);
-    res.render("./signup/userDetails.ejs",{});
+    res.render("./signup/userDetails.ejs",{user});
 });
 //,validateUpdateUser,userController.updataUser
 router.post("/updateUser/:id/edit",upload.single('userData[image]'),validateUpdateUser,async(req,res)=>{
