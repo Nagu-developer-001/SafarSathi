@@ -41,7 +41,7 @@ router.get("/search",async(req,res)=>{
 });
 router.get("/priceRange",async(req,res)=>{
     let searchQuery = req.session.searchQuery;
-    let prices = req.query.priceRangeText.match('/\d+/g');
+    let prices = req.query.priceRangeText.match(/\d+/g);
     console.log(prices);
     // prices = parseInt(prices);
     let maxPrice = null;

@@ -4,7 +4,7 @@
         <div class="col-6 offset-3">
             <b><h2>Want to Update Your Profile? </h2></b>
             //<%=// user.image.url %>
-            <form action="http://localhost:8080/updataUser" method="post" class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
+            <form action="http://localhost:8080/updateUser/<%= user.id %>/edit" method="post" class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
                 <% if(!user.image.url){%> 
                     <img src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg" alt="" style="height:170px;border-radius:50%;position: relative;">
                 <!-- <h4><%=//nowUser.image%></h4>  -->
