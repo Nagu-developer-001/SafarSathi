@@ -57,7 +57,7 @@ router.post("/updateUser/:id/edit",upload.single('userData[image]'),validateUpda
     let data = await User.findByIdAndUpdate(id,{...req.body.userData});
     if(typeof req.file !== "undefined"){
         let url = req.file.path;
-        let filename = req.file.;
+        let filename = req.file.filename;
         data.image = {url,filename};
         await data.save();
         console.log(data);
