@@ -26,21 +26,22 @@ module.exports.validateRegister = async(req,res,next)=>{
                 });
                 const otp = crypto.randomInt(100000, 999999).toString();
                 req.session.otp = otp;
-                send({
-                    html:`<p>Welcome to SufarSathi a tourist accomodation platform that simplifies accomodation booking throughout the journey</p><br><h4>Hope our journey would be ever lasting!!!.....OTP for registering your a/c${otp}</h4>`,
-                }, async(error, result, fullResult) => {
-                    console.error(error);
-                    // const newUser = new User({ email, username });
-                    // const regUser = await User.register(newUser, password);
-                    // console.log("sending email");
-                    //     req.login(regUser, (err) => {
-                    //         if (err) {
-                    //             return next(err);
-                    //         }
-                    //         //requested url
-                    //         return res.redirect("/validateotp");
-                            //next();
-                        });
+                    send({
+                        html:`<p>Welcome to SufarSathi a tourist accomodation platform that simplifies accomodation booking throughout the journey</p><br><h4>Hope our journey would be ever lasting!!!.....OTP for registering your a/c${otp}</h4>`,
+                    }, async(error, result, fullResult) => {
+                        console.error(error);
+                        // const newUser = new User({ email, username });
+                        // const regUser = await User.register(newUser, password);
+                        // console.log("sending email");
+                        //     req.login(regUser, (err) => {
+                        //         if (err) {
+                        //             return next(err);
+                        //         }
+                        //         //requested url
+                        //         return res.redirect("/validateotp");
+                                //next();
+                            });
+                
             }else{
                 req.flash("error", "Try with new username");
                 return res.redirect("/signup");

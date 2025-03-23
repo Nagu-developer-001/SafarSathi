@@ -21,7 +21,12 @@ module.exports.validateUserRating = Joi.object({
 module.exports.validateUpdateUser = Joi.object({
     userData:Joi.object({
         username:Joi.string(),
-        email:Joi.string(),
+        phone: Joi.string()
+        .pattern(/^[0-9]{10}$/) // Validates a 10-digit number
+        .messages({
+            'string.pattern.base': 'Phone number must be a valid 10-digit number.',
+            'any.required': 'Phone number is required.'
+        }),
         image:Joi.object({url:Joi.string()})
     })
 });

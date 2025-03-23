@@ -14,7 +14,10 @@ const UserSchema = new Schema({
         url:String,
         filename:String,
         //default:"https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-    }
+    },
+    phone:{
+        type:String
+    },
 });
 
 UserSchema.plugin(passportLocalMongoose);
