@@ -39,6 +39,10 @@ router.get("/search",async(req,res)=>{
         res.render("listings/searching.ejs",{allListing});
     }
 });
+router.get("/settings",(req,res)=>{
+    res.send("<h2>The Settings!</h2>");
+
+});
 router.get("/priceRange",async(req,res)=>{
     let searchQuery = req.session.searchQuery;
     let prices = req.query.priceRangeText.match(/\d+/g);
