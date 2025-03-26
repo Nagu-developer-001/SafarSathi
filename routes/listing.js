@@ -56,7 +56,7 @@ router.get('/list/:category', async(req, res) => {
         Arctic:"khsdgdv",
         Waterfall:"hjsbf"
     };
-    if(categories[categori]){
+    if(categories[]){
         allListing = await placeList.find({category:categori});
         //console.log(allListing);
         res.render("listings/searching.ejs",{allListing});
