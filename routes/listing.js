@@ -59,7 +59,7 @@ router.get('/list/:category', async(req, res) => {
     if(categories[categori]){
         allListing = await placeList.find({category:categori});
         //console.log(allListing);
-        res.render("listings/searching.ejs",{});
+        res.render("listings/searching.ejs",{allListing});
     }else{
         console.log("no data found");
     }
