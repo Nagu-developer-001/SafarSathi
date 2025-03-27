@@ -7,7 +7,7 @@ let otherCategoryController = require("../controllers/otherCategory.js");
 router.get("/listings/FAQ",UniqueUrl,otherCategoryController.renderFAQ);
 router.get("/listings/help",UniqueUrl,otherCategoryController.renderHelp);
 router.get("/search",async(req,res)=>{
-    let {searchQuery} =  req.query;
+    let {searchQuery} =  req.;
     let pricers = searchQuery.match(/\d+/g);
     if(searchQuery){
         req.session.searchQuery = searchQuery;
@@ -40,8 +40,8 @@ router.get("/search",async(req,res)=>{
     }
 });
 router.get("/settings",(req,res)=>{
-    res.send("<h2>The Settings!</h2>");
-
+    // res.send("<h2>The Settings!</h2>");
+    res.render("listings/settings.ejs");
 });
 router.get("/priceRange",async(req,res)=>{
     let searchQuery = req.session.searchQuery;
