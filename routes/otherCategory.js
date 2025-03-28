@@ -7,7 +7,7 @@ let otherCategoryController = require("../controllers/otherCategory.js");
 router.get("/listings/FAQ",UniqueUrl,otherCategoryController.renderFAQ);
 router.get("/listings/help",UniqueUrl,otherCategoryController.renderHelp);
 router.get("/search",async(req,res)=>{
-    let {searchQuery} =  req.query;
+    let {searchQuery} =  req.;
     let pricers = searchQuery.match(/\d+/g);
     if(searchQuery){
         req.session.searchQuery = searchQuery;
