@@ -36,7 +36,7 @@ router.post(
 
 router.get("/userDetails/:id",async(req,res)=>{
     //if (req.isAuthenticated()) {
-    let {id} = req.params;
+    let {id} = req.;
     // res.send(req.user);
     let user = await User.findById(id);
     // //let data = await User.find({username:user.username});
