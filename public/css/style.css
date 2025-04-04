@@ -81,8 +81,8 @@ label{
     height:5rem;
     display:flex;
     flex-wrap: wrap;
+    align-: space-evenly;
     justify-content: center;    
-    align-items: space-evenly;
 }
 /* cards-list */
 .card-img-top{
