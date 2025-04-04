@@ -35,23 +35,11 @@ router.post(
 );
 
 router.get("/userDetails/:id",async(req,res)=>{
-    //if (req.isAuthenticated()) {
     let {id} = req.params;
-    // res.send(req.user);
     let user = await User.findById(id);
-    // //let data = await User.find({username:user.username});
-    // console.log(user);
     res.render("./signup/userDetails.ejs",{user});
-    //}
 });
-//,validateUpdateUser,userController.updataUser
 router.post("/updateUser/:id/edit",upload.single('userData[image]'),validateUpdateUser,async(req,res)=>{
-    // let url = req.file.path;
-    // let filename = req.file.filename;
-    // console.log(filename);
-    // console.log(req.body.userData);
-    // let userDetails = req.body.userData;
-    // userDetails.image = {url,filename}
     let id = req.params.id;
     console.log(id);
     let data = await User.findByIdAndUpdate(id,{...req.body.userData});
@@ -65,7 +53,6 @@ router.post("/updateUser/:id/edit",upload.single('userData[image]'),validateUpda
     await data.save();
     req.flash("success","Your Personal Details Edited Successfully!");
     console.log(id);
-    //res.send("USER DATA SAVED SUCCSSFULLY!");
     res.redirect(`/userDetails/${id}`);
 });
 

@@ -147,6 +147,220 @@ label{
 }
 /* .mode i {
     font-size: 1.4rem;
+    /* cursor: pointer;
+    color: var(--primary-color);
+    opacity: 1;
+    animation: rightSideAni 1.5s ease forwards;
+}*/
+
+/* 
+
+
+.dark-mode .logo a, 
+.dark-mode ul li a, 
+.dark-mode .main h3, 
+.dark-mode .main h1 {
+    color: yellow;
+}
+.dark-mode ul li a.active, .dark-mode ul li a:hover {
+    color: var(--primary-color);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, .1);
+    background: #fff;
+}
+    
+
+.dark-mode header {
+    box-shadow: 0 4px 17px rgb(80 80 80 / 31%);
+    background: var(--primary-dark);
+}
+
+ */
+/* .dark-mode{
+    background-color:#C4D9FF;
+    box-shadow: 15px 5px 8px rgba(100, 97, 99, 0.916);
+    /* background-color: #fe424d; */
+    /* transition:0.5s; */
+/* } */ */
+/* .mode input {
+    display: none;
+} */
+/* .light-mode{
+    background-color: #fff;
+    transition: 0.5s;
+} */
+/* #darkModeToggle{
+    display: none;
+    margin: 10px !important;
+} */
+/* .dark{
+    transition: 0.5s;
+} */ */
+
+/* #filters{
+    margin-top:0.5rem;
+    display:flex;
+    flex-wrap: nowrap;
+    align-items: center;
+/* }
+.filter{
+    text-align: center;
+    margin-right: 5rem;
+    opacity:0.7;
+    transition: 0.7s;
+}
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+} */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Roboto:wght@100;300;400&display=swap'); */
+
+:root {
+    /* --primary-color: #f9532d; */
+    /* --primary-dark: #1F252E; */
+    --primary-color: #52489C;
+    --primary-dark: #1F252E;
+}
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    /* btn color in new form  */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}/* btn color in new form  */
+.container{
+    flex:1;
+    /* btn color in new form  */
+}
+label{
+    padding-top: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.navbar-expand-md{
+    background-color: yellow;
+    height: 5rem;
+    transition: 0.5s;
+}
+.solids{
+    color: #fe424d !important;
+    background-color: white;
+    opacity: 1;
+    font-size: larger;
+    transition: 0.5s;
+    padding-top: 5px;
+}
+.dark-solid{
+    background-color: #C4D9FF;
+}
+.nav-link{
+    color: #222222;
+    opacity: 0.7;
+    /* transition:opacity 0.6s linear ,font-weight 0.6s linear !important;
+    transition: text-decoration-line 6s linear !important; */
+    transition: 1s !important;
+}
+.nav-link:hover{
+    opacity: 1;
+    font-weight: 700;
+    /* text-decoration-line: overline underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: aqua;
+    text-decoration-style: dotted; */
+
+}
+.f-clsss-links a{
+    text-decoration: none;
+    color: red !important;
+}
+.f-clsss-links a:hover{
+    text-decoration: underline;
+    color: dodgerblue;
+}
+.f-clsss-socilac,.f-clsss-links,.f-clsss-company{
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+.f-clsss-socilac {
+    font-size:1.5rem;
+}
+.f-clsss-socilac i{
+    margin-right: 1rem;
+}
+.f-clsss-whole{
+    text-align:center;
+    background-color: #bebebe;
+    height:5rem;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;    
+    align-items: space-evenly;
+}
+/* cards-list */
+.card-img-top{
+    height: 20rem;
+    margin-right: 2rem;
+}
+.card-list{
+    border:none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 2rem !important;
+    width:100% !important;
+    object-fit: cover;
+}
+.card-dark{
+    background-color: #C4D9FF !important;
+}
+.cd{
+    box-shadow:0;
+    transition:0.5s;
+}
+.cd:hover{
+    box-shadow: 15px 15px 8px rgba(100, 2, 49, 0.5);
+}
+.card-body{
+    padding: 0 !important;
+
+}
+.card-text{
+    font-weight: 400;
+    display: inline;
+}
+.cd .card-text:hover{
+    font-size: 900;
+    background-color: #fe424d;
+}
+.listing-anch{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 1;
+}
+.card-img-overlay:hover{
+    opacity: 0.1;
+    background-color: white;
+}
+/* btn color in new form  */
+.add-btn{
+    background-color: #fe424d !important;
+    border:none !important;
+}
+.show-Photo{
+    height: 30vh;
+}
+.colbtn{
+    display: flex;
+    
+}
+.accordion-item{
+    border-radius: 20px !important;
+}
+/* .mode i {
+    font-size: 1.4rem;
     cursor: pointer;
     color: var(--primary-color);
     opacity: 1;
