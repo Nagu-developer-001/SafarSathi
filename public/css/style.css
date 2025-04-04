@@ -81,7 +81,7 @@ label{
     height:5rem;
     display:flex;
     flex-wrap: wrap;
-    align-: space-evenly;
+    align-items: space-evenly;
     justify-content: center;    
 }
 /* cards-list */
