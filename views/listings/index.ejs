@@ -8,48 +8,88 @@
     }
     .filter{
         text-decoration: none;
+        }
+        /* User Event Filters Button *
+    .filter .user-filter-button {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 1px solid #d24efa;
+        background: var(--bg-light);
+        color: #d24efa;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+    }*/
+    @media (max-width:768px) {
+        .filter-container{
+            display: flex;
+            overflow-x: auto;
+            padding: 5px 0;
+            gap: 5px;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+        .filter-ele{
+            padding: 7px 15px;
+            border-radius: 10px;
+            border: 0px solid #4e8dfa;
+            background: var(--text-dark);
+            color: #fa8211;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-ele:hover,
+        .filter-ele.active{
+            background: #fa8211;
+             color: white;
+        }
     }
 </style>
     <!-- <br> -->
     <!-- <h3>All Listing</h3> -->
-    <div id="filters">
-        <a href="/listings/list/Trending" class="filter">
+    <div class="filter-section">
+    <div class="filter filter-container">
+        <a href="/listings/list/Trending" class="filter filter-ele">
             <i class="fa-solid fa-fire"></i>
             <p>Trending</p>
         </a>
-        <a href="/listings/list/rooms" class="filter">
+        <a href="/listings/list/rooms" class="filter filter-ele">
             <i class="fa-solid fa-bed"></i>
             <p>Rooms</p>
         </a>
-        <a href="/listings/list/Iconiccities" class="filter">
+        <a href="/listings/list/Iconiccities" class="filter filter-ele">
             <i class="fa-solid fa-city"></i>
             <p>Iconic cities</p>
         </a>
-        <a href="/listings/list/Mountains" class="filter">
+        <a href="/listings/list/Mountains" class="filter filter-ele">
             <i class="fa-solid fa-mountain"></i>
             <p>Mountains</p>
         </a>
-        <a href="/listings/list/Castles" class="filter">
+        <a href="/listings/list/Castles" class="filter filter-ele">
             <i class="fa-brands fa-fort-awesome"></i>
             <p>Castles</p>
         </a>
-        <a href="/listings/list/Religion" class="filter">
+        <a href="/listings/list/Religion" class="filter filter-ele">
             <i class="fa-solid fa-om"></i>
             <p>Religion</p>
         </a>
-        <a href="/listings/list/Camping" class="filter">
+        <a href="/listings/list/Camping" class="filter filter-ele">
             <i class="fa-solid fa-tent-arrow-down-to-line"></i>
             <p>Camping</p>
         </a>
-        <a href="/listings/list/Farms" class="filter">
+        <a href="/listings/list/Farms" class="filter filter-ele">
             <i class="fa-solid fa-tractor"></i>
             <p>Farms</p>
         </a>
-        <a href="/listings/list/Arctic" class="filter">
+        <a href="/listings/list/Arctic" class="filter filter-ele">
             <i class="fa-solid fa-snowman"></i>
             <p>Arctic</p>
         </a>
-		<a href="/listings/list/Waterfall" class="filter">
+		<a href="/listings/list/Waterfall" class="filter filter-ele">
             <i class="fa-solid fa-water-ladder"></i>
             <p>Waterfall</p>
         </a>
@@ -62,6 +102,7 @@
             </div>
         </div>
     </div>
+</div>
     <!-- <form action="listing/new" method="get">
         <button>new</button>
     </form> -->
