@@ -59,7 +59,7 @@ module.exports.editList = async(req,res)=>{
 module.exports.updateList = async(req,res)=>{
     let {id} = req.params;
     let placeAdd = await listingController.findByIdAndUpdate(id,{...req.body.Listing});
-    if(typeof req.file !== "undefined"){
+    if(typeof req.file !== "undefned"){
     let url = req.file.path;
     let filename = req.file.filename;
     placeAdd.image = {url,filename};
