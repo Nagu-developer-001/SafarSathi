@@ -84,7 +84,8 @@ app.use("/",userRouter);
 app.use("/",reviewsRouter);
 
 // const review = require("./models/review.js");
-console.log(ExpressErr);
+//console.log(ExpressErr);
+let URL = process.env.ATLASDB_URL;
 main().then((res)=>{
     console.log("Successfully Connected to DataBase!");
 }).catch((err)=>{
@@ -92,8 +93,9 @@ main().then((res)=>{
 });
 
 
+console.log(URL);
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/wonderLust");
+    await mongoose.connect(URL);
 }
 // app.use("/api",(req,res,next)=>{
 //     console.log("This is middleware !!! for/here we do athentication");

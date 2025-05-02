@@ -3,9 +3,11 @@ const express = require("express");
 const multer  = require('multer');
 const {storage} = require("../cloudConfigure.js");
 const upload = multer({ storage: storage });
-
-
 const router = express.Router();
+
+router.use(express.json()); // Parses JSON request bodies
+router.use(express.urlencoded({ extended: true })); // Parses form-urlencoded request bodies
+
 const mongoose = require("mongoose");
 const placeList = require("../models/wonderLust.js");
 const validateUserData = require("../joiSchema.js");
