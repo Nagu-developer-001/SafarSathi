@@ -106,7 +106,7 @@ module.exports.validateUpdateUser = (req,res,next) =>{
         next();
     }
 };
-module.exports. = (req,res,next)=>{
+module.exports.UniqueUrl = (req,res,next)=>{
     req.session.redirectUrlUnique = req.originalUrl;
     console.log(req.session.redirectUrlUnique)
     console.log(req.originalUrl);
